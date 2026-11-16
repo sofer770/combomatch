@@ -1,0 +1,1024 @@
+{
+  "version": "draft-9",
+  "date": "2026-11-16",
+  "source": "מהי שיטת צירופי המזון.docx + Shelton, The Hygienic System: Orthotrophy",
+  "families": [
+    {
+      "id": "starch",
+      "name": "עמילנים",
+      "examples": "אורז, קינואה, כוסמת, תפוח אדמה, בטטה, לחם, פסטה ומוצרי קמח"
+    },
+    {
+      "id": "starchy_veg",
+      "name": "ירקות עמילניים",
+      "examples": "גזר, סלק, דלעת"
+    },
+    {
+      "id": "animal_protein",
+      "name": "חלבון מן החי",
+      "examples": "בשר, עוף, דגים, מוצרי חלב"
+    },
+    {
+      "id": "legumes",
+      "name": "קטניות",
+      "examples": "שעועית, מש, עדשים, אפונה (חלבון מן הצומח)"
+    },
+    {
+      "id": "nuts",
+      "name": "אגוזים",
+      "examples": "כל סוגי האגוזים והשקדים (גם חלבון וגם שומן)"
+    },
+    {
+      "id": "fats",
+      "name": "שומנים",
+      "examples": "שמנים, טחינה, אבוקדו"
+    },
+    {
+      "id": "green_veg",
+      "name": "ירקות ירוקים",
+      "examples": "תרד, מלפפון, קישוא, כרוב, ברוקולי, קולורבי, שעועית ירוקה, אספרגוס, במיה, רוקט ועשבי תיבול. גם הם ירקות ניטרליים, לא עמילניים"
+    },
+    {
+      "id": "lettuce_celery",
+      "name": "חסה וסלרי",
+      "examples": "חסה, כרפס (סלרי). ירקות ירוקים שלשלטון משלב גם בסלטי פירות"
+    },
+    {
+      "id": "neutral_veg",
+      "name": "ירקות ניטרליים",
+      "examples": "כרובית, פלפל (בכל הצבעים), חציל, צנון, לפת, פטריות, בצל, שום, כרישה. ירקות לא עמילניים שמשתלבים עם חלבונים וגם עם פחמימות"
+    },
+    {
+      "id": "tomato",
+      "name": "עגבנייה",
+      "examples": "עגבנייה (מוזכרת בשיטה כמקרה נפרד)"
+    },
+    {
+      "id": "sour_fruit",
+      "name": "פירות חמוצים",
+      "examples": "תפוז, אשכולית, רימון, לימון, תפוח חמוץ, אפרסק חמוץ, שזיף חמוץ, אננס"
+    },
+    {
+      "id": "semi_fruit",
+      "name": "פירות חמצמצים",
+      "examples": "פאפאיה, אפרסק, משמש, שזיף, מנגו, אגס, דובדבן, תאנה, פטל, אוכמניות"
+    },
+    {
+      "id": "sweet_fruit",
+      "name": "פירות מתוקים",
+      "examples": "בננה, תמרים, צימוקים, אפרסמון, פירות יבשים"
+    },
+    {
+      "id": "melons",
+      "name": "מלונים וענבים",
+      "examples": "אבטיח, מלון, ענבים (נאכלים לבד)"
+    }
+  ],
+  "rules": [
+    {
+      "id": "starch__starch",
+      "familyA": "starch",
+      "familyB": "starch",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מאכל עמילני אחד בכל ארוחה, למשל כוסמת ולא כוסמת וגם אורז.",
+      "source": "כללי צירופי המזון, כלל 2"
+    },
+    {
+      "id": "starch__starchy_veg",
+      "familyA": "starch",
+      "familyB": "starchy_veg",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "שלטון מתיר לשלב מזון עמילני מרוכז (כמו לחם או אורז) עם ירקות בעלי עמילן קל (כמו גזר, דלעת או בטטה). הכלל הנוקשה הוא לא לשלב שני עמילנים מרוכזים יחד, למשל תפוחי אדמה עם לחם, כדי למנוע אכילת יתר ותסיסה.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "starch__animal_protein",
+      "familyA": "starch",
+      "familyB": "animal_protein",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "חלבון עם עמילן הוא הטעות הנפוצה ביותר.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "starch__legumes",
+      "familyA": "starch",
+      "familyB": "legumes",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "חלבון (כולל קטניות) עם עמילן.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "starch__nuts",
+      "familyA": "starch",
+      "familyB": "nuts",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "אגוזים עם עמילנים.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "starch__fats",
+      "familyA": "starch",
+      "familyB": "fats",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "מזון עמילני עם שומנים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "starch__green_veg",
+      "familyA": "starch",
+      "familyB": "green_veg",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "ירקות ירוקים עם כל העמילניים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "starch__tomato",
+      "familyA": "starch",
+      "familyB": "tomato",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "שלטון: עגבנייה לעולם אין לצרף לשום מזון עמילני.",
+      "source": "Shelton, The Hygienic System: Orthotrophy, פרק Acid-Starch"
+    },
+    {
+      "id": "starch__sour_fruit",
+      "familyA": "starch",
+      "familyB": "sour_fruit",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "עמילנים עם פירות.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "starch__semi_fruit",
+      "familyA": "starch",
+      "familyB": "semi_fruit",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "עמילנים עם פירות.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "starch__sweet_fruit",
+      "familyA": "starch",
+      "familyB": "sweet_fruit",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "עמילנים עם פירות.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "starch__melons",
+      "familyA": "starch",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "starchy_veg__starchy_veg",
+      "familyA": "starchy_veg",
+      "familyB": "starchy_veg",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "מותר לשלב סוגים שונים של ירקות, עמילניים ושאינם עמילניים, יחד באותה ארוחה.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "starchy_veg__animal_protein",
+      "familyA": "starchy_veg",
+      "familyB": "animal_protein",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "חלבון עם ירקות עמילניים.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "starchy_veg__legumes",
+      "familyA": "starchy_veg",
+      "familyB": "legumes",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "חלבון עם ירקות עמילניים.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "starchy_veg__nuts",
+      "familyA": "starchy_veg",
+      "familyB": "nuts",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "חלבון עם ירקות עמילניים.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "starchy_veg__fats",
+      "familyA": "starchy_veg",
+      "familyB": "fats",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "השיטה מתירה שומנים 'עם כל העמילניים', וכנראה זה כולל ירקות עמילניים.",
+      "source": "צירופים חיוביים (פרשנות שאושרה ע״י בעל השיטה)"
+    },
+    {
+      "id": "starchy_veg__green_veg",
+      "familyA": "starchy_veg",
+      "familyB": "green_veg",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "בדוגמת ארוחת הצהריים: סלט ירקות גדול עם ירקות עמילניים מאודים.",
+      "source": "כלל 1, דוגמה (פרשנות שאושרה ע״י בעל השיטה)"
+    },
+    {
+      "id": "starchy_veg__tomato",
+      "familyA": "starchy_veg",
+      "familyB": "tomato",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "שלטון: עגבנייה לעולם אין לצרף לשום מזון עמילני. ירקות עמילניים נחשבים בשיטה חלק מארוחה עמילנית.",
+      "source": "Shelton, The Hygienic System: Orthotrophy, פרק Acid-Starch + מסמך השיטה"
+    },
+    {
+      "id": "starchy_veg__sour_fruit",
+      "familyA": "starchy_veg",
+      "familyB": "sour_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "השיטה מונה ירקות עמילניים כחלק מארוחה עמילנית ואוסרת עמילנים עם פירות. שלטון: אין לאכול עמילן עם פירות חמוצים, ופירות מתוקים עם עמילן גורמים לתסיסה.",
+      "source": "מסמך השיטה + Shelton, The Hygienic System: Orthotrophy, פרקים Acid-Starch ו-Sugar-Starch"
+    },
+    {
+      "id": "starchy_veg__semi_fruit",
+      "familyA": "starchy_veg",
+      "familyB": "semi_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "השיטה מונה ירקות עמילניים כחלק מארוחה עמילנית ואוסרת עמילנים עם פירות. שלטון: אין לאכול עמילן עם פירות חמוצים, ופירות מתוקים עם עמילן גורמים לתסיסה.",
+      "source": "מסמך השיטה + Shelton, The Hygienic System: Orthotrophy, פרקים Acid-Starch ו-Sugar-Starch"
+    },
+    {
+      "id": "starchy_veg__sweet_fruit",
+      "familyA": "starchy_veg",
+      "familyB": "sweet_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "השיטה מונה ירקות עמילניים כחלק מארוחה עמילנית ואוסרת עמילנים עם פירות. שלטון: אין לאכול עמילן עם פירות חמוצים, ופירות מתוקים עם עמילן גורמים לתסיסה.",
+      "source": "מסמך השיטה + Shelton, The Hygienic System: Orthotrophy, פרקים Acid-Starch ו-Sugar-Starch"
+    },
+    {
+      "id": "starchy_veg__melons",
+      "familyA": "starchy_veg",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "animal_protein__animal_protein",
+      "familyA": "animal_protein",
+      "familyB": "animal_protein",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "לא לשלב שני סוגי חלבונים באותה ארוחה.",
+      "source": "כללי צירופי המזון, כלל 2"
+    },
+    {
+      "id": "animal_protein__legumes",
+      "familyA": "animal_protein",
+      "familyB": "legumes",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "חלבון מן החי עם חלבון מן הצומח, כמו עוף עם שעועית.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "animal_protein__nuts",
+      "familyA": "animal_protein",
+      "familyB": "nuts",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "אגוזים עם חלבונים אחרים.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "animal_protein__fats",
+      "familyA": "animal_protein",
+      "familyB": "fats",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "חלבון עם שמנים.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "animal_protein__green_veg",
+      "familyA": "animal_protein",
+      "familyB": "green_veg",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "חלבון עם ירקות, למשל בשר או דג עם סלט ירוק עשיר.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "animal_protein__tomato",
+      "familyA": "animal_protein",
+      "familyB": "tomato",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "שלטון: עגבניות, כמו פירות חמוצים, אין לאכול עם בשר, ביצים, גבינה או אגוזים.",
+      "source": "Shelton, The Hygienic System: Orthotrophy, פרק Acid-Protein"
+    },
+    {
+      "id": "animal_protein__sour_fruit",
+      "familyA": "animal_protein",
+      "familyB": "sour_fruit",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "חלבון עם פירות חמוצים (גם לימון על הדג).",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "animal_protein__semi_fruit",
+      "familyA": "animal_protein",
+      "familyB": "semi_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "לפי שלטון אין לאכול פרי חמוץ או חמצמץ עם חלבון: החומצה מעכבת את הפרשת מיצי הקיבה הדרושים לפירוק החלבון, והדבר גורם לריקבון. שלטון קבע לגבי חלב וגבינות רכות: \"יש לצרוך חלב לבד, או לא לצרוך אותו בכלל\". סלט פירות עם קוטג' אינו של שלטון, ומקורו כנראה במטפלים מאוחרים יותר או בדיאטת היי.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "animal_protein__sweet_fruit",
+      "familyA": "animal_protein",
+      "familyB": "sweet_fruit",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "פירות מתוקים עם חלבון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "animal_protein__melons",
+      "familyA": "animal_protein",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "legumes__legumes",
+      "familyA": "legumes",
+      "familyB": "legumes",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "לא לשלב שני סוגי חלבונים באותה ארוחה.",
+      "source": "כללי צירופי המזון, כלל 2"
+    },
+    {
+      "id": "legumes__nuts",
+      "familyA": "legumes",
+      "familyB": "nuts",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "אגוזים עם חלבונים אחרים.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "legumes__fats",
+      "familyA": "legumes",
+      "familyB": "fats",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "שומנים ושמנים עם כל החלבונים.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "legumes__green_veg",
+      "familyA": "legumes",
+      "familyB": "green_veg",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "קטניות בשילוב עם ירקות ירוקים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "legumes__tomato",
+      "familyA": "legumes",
+      "familyB": "tomato",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "שלטון: עגבניות, כמו פירות חמוצים, אין לאכול עם בשר, ביצים, גבינה או אגוזים. קטניות הן חלבון לפי השיטה.",
+      "source": "Shelton, The Hygienic System: Orthotrophy, פרק Acid-Protein"
+    },
+    {
+      "id": "legumes__sour_fruit",
+      "familyA": "legumes",
+      "familyB": "sour_fruit",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "פירות חמוצים עם חלבון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "legumes__semi_fruit",
+      "familyA": "legumes",
+      "familyB": "semi_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "לפי שלטון אין לאכול פרי חמוץ או חמצמץ עם חלבון: החומצה מעכבת את הפרשת מיצי הקיבה הדרושים לפירוק החלבון, והדבר גורם לריקבון. קטניות הן שילוב מורכב של חלבון ועמילן, ולכן פרי חמוץ או חמצמץ איתן אסור לחלוטין.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "legumes__sweet_fruit",
+      "familyA": "legumes",
+      "familyB": "sweet_fruit",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "פירות מתוקים עם חלבון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "legumes__melons",
+      "familyA": "legumes",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "nuts__nuts",
+      "familyA": "nuts",
+      "familyB": "nuts",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "אגוזים הם חלבון, והשיטה אוסרת שני סוגי חלבון. לא ברור אם זה חל גם על שני סוגי אגוזים.",
+      "source": "כלל 2 (פרשנות שאושרה ע״י בעל השיטה)"
+    },
+    {
+      "id": "nuts__fats",
+      "familyA": "nuts",
+      "familyB": "fats",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "אגוזים עם שמנים.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "nuts__green_veg",
+      "familyA": "nuts",
+      "familyB": "green_veg",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "ירקות ירוקים עם כל החלבונים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "nuts__tomato",
+      "familyA": "nuts",
+      "familyB": "tomato",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "שלטון: עגבניות, כמו פירות חמוצים, אין לאכול עם בשר, ביצים, גבינה או אגוזים.",
+      "source": "Shelton, The Hygienic System: Orthotrophy, פרק Acid-Protein"
+    },
+    {
+      "id": "nuts__sour_fruit",
+      "familyA": "nuts",
+      "familyB": "sour_fruit",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "פירות חמוצים אפשר גם עם אגוזים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "nuts__semi_fruit",
+      "familyA": "nuts",
+      "familyB": "semi_fruit",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "שלטון מגיש סלט תפוחים ואגסים עם אגוזים, ואוסר אגוזים רק עם סלטי פירות מתוקים.",
+      "source": "Shelton, The Hygienic System: Orthotrophy, פרק Fruit Salads"
+    },
+    {
+      "id": "nuts__sweet_fruit",
+      "familyA": "nuts",
+      "familyB": "sweet_fruit",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "פירות מתוקים עם חלבון, ואגוזים נחשבים חלבון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "nuts__melons",
+      "familyA": "nuts",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "fats__fats",
+      "familyA": "fats",
+      "familyB": "fats",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "אין איסור קטגורי על שילוב שומנים שונים, כמו שיש על חלבונים שונים. עם זאת, שלטון המליץ להשתמש בשומן במתינות רבה ולא להעמיס סוגים שונים.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "fats__green_veg",
+      "familyA": "fats",
+      "familyB": "green_veg",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "שומנים ושמנים עם הירקות הירוקים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "fats__tomato",
+      "familyA": "fats",
+      "familyB": "tomato",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "עגבנייה נחשבת אצל שלטון פרי חומצי ללא סוכר, והוא מתיר במפורש לשלב אותה עם שומנים, כמו אבוקדו או שמן זית בסלט.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "fats__sour_fruit",
+      "familyA": "fats",
+      "familyB": "sour_fruit",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "החריג היחיד לאיסור שומנים עם פירות: פירות חמוצים מאוד (כמו לימון או שסק חמוץ) הותר לשלב לעיתים עם אבוקדו או אגוזים.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "fats__semi_fruit",
+      "familyA": "fats",
+      "familyB": "semi_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "שלטון אסר על שילוב שומנים (כמו אגוזים, שמן או אבוקדו) עם רוב הפירות, ובמיוחד מתוקים, כי שומן מאט את העיכול וגורם לסוכר שבפרי לתסוס בקיבה.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "fats__sweet_fruit",
+      "familyA": "fats",
+      "familyB": "sweet_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "שלטון אסר על שילוב שומנים (כמו אגוזים, שמן או אבוקדו) עם רוב הפירות, ובמיוחד מתוקים, כי שומן מאט את העיכול וגורם לסוכר שבפרי לתסוס בקיבה.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "fats__melons",
+      "familyA": "fats",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "green_veg__green_veg",
+      "familyA": "green_veg",
+      "familyB": "green_veg",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "השיטה ממליצה על 'סלט ירוק עשיר', כלומר כמה ירקות ירוקים יחד.",
+      "source": "צירופים חיוביים (פרשנות שאושרה ע״י בעל השיטה)"
+    },
+    {
+      "id": "green_veg__tomato",
+      "familyA": "green_veg",
+      "familyB": "tomato",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "עגבנייה בצירוף עם ירקות ירוקים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "green_veg__sour_fruit",
+      "familyA": "green_veg",
+      "familyB": "sour_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "לפי שלטון, הכלל הוא שאין לשלב פירות עם ירקות בכלל. החריגים היחידים הם חסה וסלרי, שמותר לאכול עם פירות בזכות עיכולם המהיר והניטרליות שלהם. שאר הירקות הירוקים והעמילניים אינם מתאימים לשילוב עם פירות.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "green_veg__semi_fruit",
+      "familyA": "green_veg",
+      "familyB": "semi_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "לפי שלטון, הכלל הוא שאין לשלב פירות עם ירקות בכלל. החריגים היחידים הם חסה וסלרי, שמותר לאכול עם פירות בזכות עיכולם המהיר והניטרליות שלהם. שאר הירקות הירוקים והעמילניים אינם מתאימים לשילוב עם פירות.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "green_veg__sweet_fruit",
+      "familyA": "green_veg",
+      "familyB": "sweet_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "לפי שלטון, הכלל הוא שאין לשלב פירות עם ירקות בכלל. החריגים היחידים הם חסה וסלרי, שמותר לאכול עם פירות בזכות עיכולם המהיר והניטרליות שלהם. שאר הירקות הירוקים והעמילניים אינם מתאימים לשילוב עם פירות.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "green_veg__melons",
+      "familyA": "green_veg",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "tomato__tomato",
+      "familyA": "tomato",
+      "familyB": "tomato",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "מותר לשלב סוגים שונים של עגבניות באותה ארוחה.",
+      "source": "לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "tomato__sour_fruit",
+      "familyA": "tomato",
+      "familyB": "sour_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "עגבנייה היא פרי חומצי מבחינה בוטנית, אך לפי שלטון אין לשלב פירות חומציים (ובכללם עגבנייה) עם פירות מתוקים או עם עמילנים. עגבנייה משתלבת רק עם ירקות שאינם עמילניים ועם שומנים.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "tomato__semi_fruit",
+      "familyA": "tomato",
+      "familyB": "semi_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "עגבנייה היא פרי חומצי מבחינה בוטנית, אך לפי שלטון אין לשלב פירות חומציים (ובכללם עגבנייה) עם פירות מתוקים או עם עמילנים. עגבנייה משתלבת רק עם ירקות שאינם עמילניים ועם שומנים.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "tomato__sweet_fruit",
+      "familyA": "tomato",
+      "familyB": "sweet_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "עגבנייה היא פרי חומצי מבחינה בוטנית, אך לפי שלטון אין לשלב פירות חומציים (ובכללם עגבנייה) עם פירות מתוקים או עם עמילנים. עגבנייה משתלבת רק עם ירקות שאינם עמילניים ועם שומנים.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "tomato__melons",
+      "familyA": "tomato",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "sour_fruit__sour_fruit",
+      "familyA": "sour_fruit",
+      "familyB": "sour_fruit",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "פירות חמוצים עם פירות חמוצים אחרים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "sour_fruit__semi_fruit",
+      "familyA": "sour_fruit",
+      "familyB": "semi_fruit",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "פירות חמצמצים עם פירות חמוצים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "sour_fruit__sweet_fruit",
+      "familyA": "sour_fruit",
+      "familyB": "sweet_fruit",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "פירות מתוקים עם פירות חמוצים. להימנע ממתוק וחמוץ באותה ארוחה.",
+      "source": "צירופים שליליים, כלל 4"
+    },
+    {
+      "id": "sour_fruit__melons",
+      "familyA": "sour_fruit",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "semi_fruit__semi_fruit",
+      "familyA": "semi_fruit",
+      "familyB": "semi_fruit",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "שלטון מרכיב סלטי פירות מפירות חמצמצים יחד, כמו שזיפים, דובדבנים, משמש ואפרסקים.",
+      "source": "Shelton, The Hygienic System: Orthotrophy, פרק Fruit Salads"
+    },
+    {
+      "id": "semi_fruit__sweet_fruit",
+      "familyA": "semi_fruit",
+      "familyB": "sweet_fruit",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "פירות חמצמצים עם פירות מתוקים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "semi_fruit__melons",
+      "familyA": "semi_fruit",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "sweet_fruit__sweet_fruit",
+      "familyA": "sweet_fruit",
+      "familyB": "sweet_fruit",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "פירות מתוקים עם פירות מתוקים אחרים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "sweet_fruit__melons",
+      "familyA": "sweet_fruit",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "melons__melons",
+      "familyA": "melons",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלון, אבטיח וענבים נאכלים בנפרד, ללא צירופים.",
+      "source": "צירופים שליליים וחיוביים"
+    },
+    {
+      "id": "lettuce_celery__starch",
+      "familyA": "lettuce_celery",
+      "familyB": "starch",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "ירקות ירוקים עם כל העמילניים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "lettuce_celery__starchy_veg",
+      "familyA": "lettuce_celery",
+      "familyB": "starchy_veg",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "בדוגמת ארוחת הצהריים: סלט ירקות גדול עם ירקות עמילניים מאודים.",
+      "source": "כלל 1, דוגמה (פרשנות שאושרה ע״י בעל השיטה)"
+    },
+    {
+      "id": "lettuce_celery__animal_protein",
+      "familyA": "lettuce_celery",
+      "familyB": "animal_protein",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "חלבון עם ירקות, למשל בשר או דג עם סלט ירוק עשיר.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "lettuce_celery__legumes",
+      "familyA": "lettuce_celery",
+      "familyB": "legumes",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "קטניות בשילוב עם ירקות ירוקים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "lettuce_celery__nuts",
+      "familyA": "lettuce_celery",
+      "familyB": "nuts",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "ירקות ירוקים עם כל החלבונים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "lettuce_celery__fats",
+      "familyA": "lettuce_celery",
+      "familyB": "fats",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "שומנים ושמנים עם הירקות הירוקים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "lettuce_celery__green_veg",
+      "familyA": "lettuce_celery",
+      "familyB": "green_veg",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "השיטה ממליצה על 'סלט ירוק עשיר', כלומר כמה ירקות ירוקים יחד.",
+      "source": "צירופים חיוביים (פרשנות שאושרה ע״י בעל השיטה)"
+    },
+    {
+      "id": "lettuce_celery__lettuce_celery",
+      "familyA": "lettuce_celery",
+      "familyB": "lettuce_celery",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "השיטה ממליצה על 'סלט ירוק עשיר', כלומר כמה ירקות ירוקים יחד.",
+      "source": "צירופים חיוביים (פרשנות שאושרה ע״י בעל השיטה)"
+    },
+    {
+      "id": "lettuce_celery__tomato",
+      "familyA": "lettuce_celery",
+      "familyB": "tomato",
+      "level": "green",
+      "status": "explicit",
+      "explanation": "עגבנייה בצירוף עם ירקות ירוקים.",
+      "source": "צירופים חיוביים"
+    },
+    {
+      "id": "lettuce_celery__melons",
+      "familyA": "lettuce_celery",
+      "familyB": "melons",
+      "level": "red",
+      "status": "explicit",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    },
+    {
+      "id": "lettuce_celery__sour_fruit",
+      "familyA": "lettuce_celery",
+      "familyB": "sour_fruit",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "שלטון משלב חסה וסלרי בסלטי פירות חמוצים, חמצמצים ומתוקים.",
+      "source": "Shelton, The Hygienic System: Orthotrophy, פרק Fruit Salads"
+    },
+    {
+      "id": "lettuce_celery__semi_fruit",
+      "familyA": "lettuce_celery",
+      "familyB": "semi_fruit",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "שלטון משלב חסה וסלרי בסלטי פירות חמוצים, חמצמצים ומתוקים.",
+      "source": "Shelton, The Hygienic System: Orthotrophy, פרק Fruit Salads"
+    },
+    {
+      "id": "lettuce_celery__sweet_fruit",
+      "familyA": "lettuce_celery",
+      "familyB": "sweet_fruit",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "שלטון משלב חסה וסלרי בסלטי פירות חמוצים, חמצמצים ומתוקים.",
+      "source": "Shelton, The Hygienic System: Orthotrophy, פרק Fruit Salads"
+    },
+    {
+      "id": "neutral_veg__starch",
+      "familyA": "neutral_veg",
+      "familyB": "starch",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "ירק ניטרלי (לא עמילני) הוא \"שחקן ניטרלי\": אפשר להוסיף אותו לכל ארוחה בלי ליצור צירוף לא תקין. למשל עוף, טופו או ביצים עם כרובית, פלפל ובצל, או אורז, כוסמת או תפוחי אדמה עם כרובית, פלפל ובצל.",
+      "source": "לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "neutral_veg__starchy_veg",
+      "familyA": "neutral_veg",
+      "familyB": "starchy_veg",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "ירק ניטרלי (לא עמילני) הוא \"שחקן ניטרלי\": אפשר להוסיף אותו לכל ארוחה בלי ליצור צירוף לא תקין. למשל עוף, טופו או ביצים עם כרובית, פלפל ובצל, או אורז, כוסמת או תפוחי אדמה עם כרובית, פלפל ובצל.",
+      "source": "לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "animal_protein__neutral_veg",
+      "familyA": "neutral_veg",
+      "familyB": "animal_protein",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "ירק ניטרלי (לא עמילני) הוא \"שחקן ניטרלי\": אפשר להוסיף אותו לכל ארוחה בלי ליצור צירוף לא תקין. למשל עוף, טופו או ביצים עם כרובית, פלפל ובצל, או אורז, כוסמת או תפוחי אדמה עם כרובית, פלפל ובצל.",
+      "source": "לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "legumes__neutral_veg",
+      "familyA": "neutral_veg",
+      "familyB": "legumes",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "ירק ניטרלי (לא עמילני) הוא \"שחקן ניטרלי\": אפשר להוסיף אותו לכל ארוחה בלי ליצור צירוף לא תקין. למשל עוף, טופו או ביצים עם כרובית, פלפל ובצל, או אורז, כוסמת או תפוחי אדמה עם כרובית, פלפל ובצל.",
+      "source": "לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "neutral_veg__nuts",
+      "familyA": "neutral_veg",
+      "familyB": "nuts",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "ירק ניטרלי (לא עמילני) הוא \"שחקן ניטרלי\": אפשר להוסיף אותו לכל ארוחה בלי ליצור צירוף לא תקין. למשל עוף, טופו או ביצים עם כרובית, פלפל ובצל, או אורז, כוסמת או תפוחי אדמה עם כרובית, פלפל ובצל.",
+      "source": "לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "fats__neutral_veg",
+      "familyA": "neutral_veg",
+      "familyB": "fats",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "ירק ניטרלי (לא עמילני) הוא \"שחקן ניטרלי\": אפשר להוסיף אותו לכל ארוחה בלי ליצור צירוף לא תקין. למשל עוף, טופו או ביצים עם כרובית, פלפל ובצל, או אורז, כוסמת או תפוחי אדמה עם כרובית, פלפל ובצל.",
+      "source": "לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "green_veg__neutral_veg",
+      "familyA": "neutral_veg",
+      "familyB": "green_veg",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "ירק ניטרלי (לא עמילני) הוא \"שחקן ניטרלי\": אפשר להוסיף אותו לכל ארוחה בלי ליצור צירוף לא תקין. למשל עוף, טופו או ביצים עם כרובית, פלפל ובצל, או אורז, כוסמת או תפוחי אדמה עם כרובית, פלפל ובצל.",
+      "source": "לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "lettuce_celery__neutral_veg",
+      "familyA": "neutral_veg",
+      "familyB": "lettuce_celery",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "ירק ניטרלי (לא עמילני) הוא \"שחקן ניטרלי\": אפשר להוסיף אותו לכל ארוחה בלי ליצור צירוף לא תקין. למשל עוף, טופו או ביצים עם כרובית, פלפל ובצל, או אורז, כוסמת או תפוחי אדמה עם כרובית, פלפל ובצל.",
+      "source": "לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "neutral_veg__neutral_veg",
+      "familyA": "neutral_veg",
+      "familyB": "neutral_veg",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "ירק ניטרלי (לא עמילני) הוא \"שחקן ניטרלי\": אפשר להוסיף אותו לכל ארוחה בלי ליצור צירוף לא תקין. למשל עוף, טופו או ביצים עם כרובית, פלפל ובצל, או אורז, כוסמת או תפוחי אדמה עם כרובית, פלפל ובצל.",
+      "source": "לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "neutral_veg__tomato",
+      "familyA": "neutral_veg",
+      "familyB": "tomato",
+      "level": "green",
+      "status": "sourced",
+      "explanation": "ירק ניטרלי (לא עמילני) הוא \"שחקן ניטרלי\": אפשר להוסיף אותו לכל ארוחה בלי ליצור צירוף לא תקין. למשל עוף, טופו או ביצים עם כרובית, פלפל ובצל, או אורז, כוסמת או תפוחי אדמה עם כרובית, פלפל ובצל.",
+      "source": "לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "neutral_veg__sour_fruit",
+      "familyA": "neutral_veg",
+      "familyB": "sour_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "לפי שלטון, הכלל הוא שאין לשלב פירות עם ירקות בכלל. החריגים היחידים הם חסה וסלרי, שמותר לאכול עם פירות בזכות עיכולם המהיר והניטרליות שלהם. שאר הירקות הירוקים והעמילניים אינם מתאימים לשילוב עם פירות.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "neutral_veg__semi_fruit",
+      "familyA": "neutral_veg",
+      "familyB": "semi_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "לפי שלטון, הכלל הוא שאין לשלב פירות עם ירקות בכלל. החריגים היחידים הם חסה וסלרי, שמותר לאכול עם פירות בזכות עיכולם המהיר והניטרליות שלהם. שאר הירקות הירוקים והעמילניים אינם מתאימים לשילוב עם פירות.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "neutral_veg__sweet_fruit",
+      "familyA": "neutral_veg",
+      "familyB": "sweet_fruit",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "לפי שלטון, הכלל הוא שאין לשלב פירות עם ירקות בכלל. החריגים היחידים הם חסה וסלרי, שמותר לאכול עם פירות בזכות עיכולם המהיר והניטרליות שלהם. שאר הירקות הירוקים והעמילניים אינם מתאימים לשילוב עם פירות.",
+      "source": "Shelton, לפי הכרעת בעל השיטה (16.11.2026)"
+    },
+    {
+      "id": "melons__neutral_veg",
+      "familyA": "neutral_veg",
+      "familyB": "melons",
+      "level": "red",
+      "status": "sourced",
+      "explanation": "מלונים, אבטיחים וענבים עם כל סוגי המזון.",
+      "source": "צירופים שליליים"
+    }
+  ]
+}

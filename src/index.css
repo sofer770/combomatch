@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 248 246 238;          /* cream background */
+  --surface: 255 255 255;
+  --cream: 243 239 226;
+  --line: 226 220 202;
+  --ink: 36 48 33;
+  --muted: 104 112 96;
+  --leaf: 61 125 70;
+  --leaf-dark: 42 92 50;
+  --leaf-soft: 228 240 222;
+  --earth: 150 103 62;
+  --earth-soft: 244 233 219;
+  --ok: 46 138 72;
+  --ok-soft: 222 243 226;
+  --warn: 196 138 14;
+  --warn-soft: 252 242 210;
+  --bad: 196 64 50;
+  --bad-soft: 251 228 224;
+  --unk: 110 116 128;
+  --unk-soft: 233 235 239;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: 22 27 21; --surface: 32 38 30; --cream: 40 46 37; --line: 58 66 54;
+    --ink: 232 236 224; --muted: 160 168 150;
+    --leaf: 118 186 120; --leaf-dark: 150 208 148; --leaf-soft: 38 60 38;
+    --earth: 214 168 120; --earth-soft: 60 48 36;
+    --ok: 108 196 124; --ok-soft: 30 60 38; --warn: 230 186 70; --warn-soft: 66 54 22;
+    --bad: 240 120 104; --bad-soft: 72 34 30; --unk: 170 176 188; --unk-soft: 48 52 58;
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: 22 27 21; --surface: 32 38 30; --cream: 40 46 37; --line: 58 66 54;
+  --ink: 232 236 224; --muted: 160 168 150;
+  --leaf: 118 186 120; --leaf-dark: 150 208 148; --leaf-soft: 38 60 38;
+  --earth: 214 168 120; --earth-soft: 60 48 36;
+  --ok: 108 196 124; --ok-soft: 30 60 38; --warn: 230 186 70; --warn-soft: 66 54 22;
+  --bad: 240 120 104; --bad-soft: 72 34 30; --unk: 170 176 188; --unk-soft: 48 52 58;
+  color-scheme: dark;
+}
+
+html, body { background: rgb(var(--bg)); color: rgb(var(--ink)); }
+body { font-family: Rubik, Assistant, system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+
+@layer components {
+  .card { @apply rounded-xl2 bg-surface shadow-card border border-line/60; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2.5 font-medium transition
+    focus:outline-none focus-visible:ring-2 focus-visible:ring-leaf/50 disabled:opacity-40 disabled:cursor-not-allowed; }
+  .btn-primary { @apply btn bg-leaf text-white hover:bg-leaf-dark dark:text-bg; }
+  .btn-soft { @apply btn bg-leaf-soft text-leaf-dark hover:bg-leaf-soft/70; }
+  .btn-ghost { @apply btn text-ink hover:bg-cream; }
+  .btn-danger { @apply btn bg-bad-soft text-bad hover:opacity-80; }
+  .input { @apply w-full rounded-xl border border-line bg-surface px-4 py-3 text-ink placeholder:text-muted/70
+    focus:outline-none focus:ring-2 focus:ring-leaf/40; }
+  .label { @apply mb-1 block text-sm font-medium text-muted; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full border border-line bg-surface px-3 py-1.5 text-sm; }
+}
+
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
