@@ -9,6 +9,8 @@ import Rules from './pages/Rules';
 import History from './pages/History';
 import Foods from './pages/Foods';
 import Settings from './pages/Settings';
+import Admin from './pages/Admin';
+import { isAdmin } from './analytics';
 import { useDb } from './state/AppContext';
 import logo from './assets/logo.png';
 import centerLogo from './assets/center-logo.png';
@@ -34,6 +36,12 @@ function ScrollTop() {
 export default function App() {
   const { savedMeals } = useDb();
   const [contactOpen, setContactOpen] = useState(false);
+  const [admin, setAdmin] = useState(isAdmin());
+  useEffect(() => {
+    const on = () => setAdmin(isAdmin());
+    window.addEventListener('combomatch-admin', on);
+    return () => window.removeEventListener('combomatch-admin', on);
+  }, []);
   return (
     <div className="min-h-screen pb-24 sm:pb-8">
       <ScrollTop />
@@ -52,10 +60,18 @@ export default function App() {
               </NavLink>
             ))}
           </nav>
+          <div className="flex items-center gap-1">
+          {admin && (
+            <NavLink to="/admin" aria-label="נתוני שימוש (מנהל)" title="רק עבורך"
+              className={({ isActive }) => `grid h-10 w-10 place-items-center rounded-full text-xl ${isActive ? 'bg-leaf-soft' : 'hover:bg-cream'}`}>
+              📊
+            </NavLink>
+          )}
           <NavLink to="/settings" aria-label="הגדרות"
             className={({ isActive }) => `grid h-10 w-10 place-items-center rounded-full text-xl ${isActive ? 'bg-leaf-soft' : 'hover:bg-cream'}`}>
             ⚙️
           </NavLink>
+          </div>
         </div>
       </header>
 
@@ -68,6 +84,7 @@ export default function App() {
           <Route path="/history" element={<History />} />
           <Route path="/foods" element={<Foods />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<div className="py-20 text-center"><p className="text-lg">הדף לא נמצא</p><Link to="/" className="btn-primary mt-4">למסך הבית</Link></div>} />
         </Routes>
       </main>

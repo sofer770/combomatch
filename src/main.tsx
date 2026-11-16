@@ -13,6 +13,7 @@ import '@fontsource/rubik/latin-600.css';
 import '@fontsource/rubik/latin-700.css';
 import './index.css';
 import logo from './assets/logo.png';
+import { trackOpen } from './analytics';
 
 const icon = document.createElement('link');
 icon.rel = 'icon';
@@ -29,6 +30,8 @@ if (import.meta.env.PROD && import.meta.env.MODE !== 'single' && 'serviceWorker'
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   });
 }
+
+trackOpen();
 
 const Router = import.meta.env.MODE === 'single' ? MemoryRouter : HashRouter;
 

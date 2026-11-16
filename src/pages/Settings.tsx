@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ConfirmDialog, DISCLAIMER, PageTitle } from '../components/ui';
 import { store, useDb, useUi } from '../state/AppContext';
 import { ExportDialog } from '../components/ExportDialog';
@@ -56,6 +57,8 @@ export default function Settings() {
         <h2 className="font-semibold">אודות</h2>
         <p className="mt-1 text-ink/80">ComboMatch גרסה 1.0. מקור הכללים: {METHOD_SOURCE_DOC} (טיוטת מטריצה {METHOD_MATRIX_VERSION}). גרסת הכללים הנוכחית במכשיר: {s.rulesVersion}.</p>
         <p className="mt-2 text-muted">{DISCLAIMER}</p>
+        <p className="mt-2 text-muted">האפליקציה סופרת כניסות והתקנות באופן אנונימי, בלי עוגיות ובלי מידע אישי.</p>
+        <Link to="/admin" className="mt-3 inline-block text-xs text-muted underline-offset-2 hover:underline">כניסת מנהל</Link>
       </section>
 
       <ExportDialog open={exporting} onClose={() => setExporting(false)} title="גיבוי מלא"
