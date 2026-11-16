@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ConfirmDialog, DISCLAIMER, PageTitle } from '../components/ui';
+import { ConfirmDialog, PageTitle } from '../components/ui';
 import { store, useDb, useUi } from '../state/AppContext';
 import { ExportDialog } from '../components/ExportDialog';
-import { METHOD_MATRIX_VERSION, METHOD_SOURCE_DOC } from '../data/methodRules';
 
 function Toggle({ id, label, help, checked, onChange }: { id: string; label: string; help: string; checked: boolean; onChange: (v: boolean) => void }) {
   return (
@@ -53,13 +52,9 @@ export default function Settings() {
         {store.getPersistError() && <p role="alert" className="mt-3 text-sm text-bad">{store.getPersistError()}</p>}
       </section>
 
-      <section className="card mt-4 p-4 text-sm sm:p-5">
-        <h2 className="font-semibold">אודות</h2>
-        <p className="mt-1 text-ink/80">ComboMatch גרסה 1.0. מקור הכללים: {METHOD_SOURCE_DOC} (טיוטת מטריצה {METHOD_MATRIX_VERSION}). גרסת הכללים הנוכחית במכשיר: {s.rulesVersion}.</p>
-        <p className="mt-2 text-muted">{DISCLAIMER}</p>
-        <p className="mt-2 text-muted">האפליקציה סופרת כניסות והתקנות באופן אנונימי, בלי עוגיות ובלי מידע אישי.</p>
-        <Link to="/admin" className="mt-3 inline-block text-xs text-muted underline-offset-2 hover:underline">כניסת מנהל</Link>
-      </section>
+      <div className="mt-6 text-center">
+        <Link to="/admin" className="text-xs text-muted underline-offset-2 hover:underline">כניסת מנהל</Link>
+      </div>
 
       <ExportDialog open={exporting} onClose={() => setExporting(false)} title="גיבוי מלא"
         filename={`combomatch-backup-${new Date().toISOString().slice(0, 10)}.json`} text={exporting ? store.exportAll() : ''} />
