@@ -5,6 +5,7 @@ import { DISCLAIMER } from '../components/ui';
 export default function Why() {
   return (
     <article className="mx-auto max-w-2xl">
+      <Link to="/" className="mb-3 inline-flex items-center gap-1 text-sm font-medium text-leaf-dark hover:underline">→ חזרה לאפליקציה</Link>
       <header className="mb-5">
         <p className="text-sm font-semibold text-leaf-dark">לפי שיטת צירופי המזון</p>
         <h1 className="mt-1 text-3xl font-bold tracking-tight">למה חשוב לשמור על צירופי מזון?</h1>
@@ -46,7 +47,7 @@ export default function Why() {
       </div>
 
       <div className="mt-5 flex flex-wrap gap-2">
-        <Link to="/" className="btn-primary">לבדיקת צירוף</Link>
+        <Link to="/" className="btn-primary">חזרה לאפליקציה</Link>
         <Link to="/rules" className="btn-soft">טבלת המותר והאסור</Link>
       </div>
       <p className="mt-4 text-xs text-muted">{DISCLAIMER}</p>
