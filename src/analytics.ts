@@ -90,7 +90,7 @@ export async function fetchStats(days = 30): Promise<{ daily: DailyStats[]; tota
 // The token only allows reading visit counts.
 
 /** Encrypted token, created on the admin screen ("סיסמה קצרה") and pasted here. Empty = not set. */
-export const ADMIN_LOCK = '';
+export const ADMIN_LOCK = 'RJuefCZAhTjDK30twtlLwQ==.7XrTxbr3FkPKAb1u.N74C2NkQjcsSRnBPfqbhxxv3zJjnjuOyLjFUPGb8j8yRBt7LrO+5UTqPV/SFfuSOO44qmi6NbLZmKQQ9wao5VOlP';
 
 const b64 = (u: Uint8Array) => btoa(String.fromCharCode(...u));
 const unb64 = (s: string) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
