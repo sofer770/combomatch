@@ -39,7 +39,7 @@ src/
                          SavedMeals, MealItems, HistoryEntry (SearchHistory), AppSettings
   data/method-matrix.json  מטריצת הכללים שנגזרה ממסמך השיטה (המקור היחיד לכללים)
   data/methodRules.ts    המרת המטריצה לכללים: explicit/sourced=מאומת, inferred=טעון אימות, undefined=אין כלל
-  data/seed.ts           משפחות, קטגוריות ו-88 מזונות התחלתיים
+  data/seed.ts           משפחות, קטגוריות ו-96 מזונות התחלתיים
   engine/ruleEngine.ts   מנוע החוקים
   engine/alternatives.ts הצעת חלופות
   engine/search.ts       חיפוש בעברית (ניקוד, אותיות סופיות, כתיב מלא/חסר)
