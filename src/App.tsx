@@ -11,6 +11,7 @@ import Foods from './pages/Foods';
 import Settings from './pages/Settings';
 import { useDb } from './state/AppContext';
 import logo from './assets/logo.png';
+import centerLogo from './assets/center-logo.png';
 
 const SITE_URL = 'https://el-habriut.co.il';
 
@@ -74,6 +75,9 @@ export default function App() {
       <footer className="mx-auto mt-10 max-w-3xl px-4 text-center">
         <p className="text-xs text-muted">{DISCLAIMER}</p>
         <div className="mt-4 border-t border-line pt-4 text-sm text-ink/80">
+          <a href={SITE_URL} target="_blank" rel="noopener noreferrer" className="mx-auto mb-2 block w-fit" aria-label="המרכז לבריאות טבעית">
+            <img src={centerLogo} alt="לוגו המרכז לבריאות טבעית" width={64} height={60} className="h-16 w-auto" />
+          </a>
           <p>
             נוצר ע״י יאיר גלעדי - © - ״המרכז לבריאות טבעית״
           </p>
