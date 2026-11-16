@@ -58,17 +58,20 @@ interface HitsResponse { hits?: { path: string; count?: number; stats?: { day: s
 export async function fetchStats(days = 30): Promise<{ daily: DailyStats[]; totalVisits: number; totalInstalls: number }> {
   const key = getAdminKey();
   if (!key || !GOATCOUNTER_CODE) throw new Error('חסר קוד מונה או מפתח מנהל');
-  const end = new Date();
-  const start = new Date(end.getTime() - (days - 1) * 86400000);
-  const ymd = (d: Date) => d.toISOString().slice(0, 10);
-  const url = `https://${GOATCOUNTER_CODE}.goatcounter.com/api/v0/stats/hits?start=${ymd(start)}&end=${ymd(end)}&limit=100&daily=true`;
+  // GoatCounter reads a bare date as midnight, so "end=today" would leave out all of today.
+  // Ask from local midnight `days` days ago, and leave out `end` so it defaults to the current time.
+  const now = new Date();
+  const start = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (days - 1));
+  const iso = (d: Date) => d.toISOString().replace(/\.\d{3}Z$/, 'Z');
+  const ymd = (d: Date) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  const url = `https://${GOATCOUNTER_CODE}.goatcounter.com/api/v0/stats/hits?start=${encodeURIComponent(iso(start))}&limit=100&daily=true`;
   const res = await fetch(url, { headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' } });
   if (res.status === 401 || res.status === 403) throw new Error('המפתח אינו תקין או שאין לו הרשאת צפייה בסטטיסטיקה');
   if (!res.ok) throw new Error(`שגיאה בקבלת הנתונים (${res.status})`);
   const data = (await res.json()) as HitsResponse;
   const byDay = new Map<string, DailyStats>();
   for (let i = 0; i < days; i++) {
-    const d = ymd(new Date(start.getTime() + i * 86400000));
+    const d = ymd(new Date(start.getFullYear(), start.getMonth(), start.getDate() + i));
     byDay.set(d, { day: d, visits: 0, installs: 0 });
   }
   let totalVisits = 0, totalInstalls = 0;
@@ -79,6 +82,7 @@ export async function fetchStats(days = 30): Promise<{ daily: DailyStats[]; tota
     for (const s of h.stats ?? []) {
       // `daily` is filled when grouping by day; fall back to adding up the hourly counts
       const n = s.daily || (s.hourly ?? []).reduce((a, b) => a + b, 0);
+      if (n && !byDay.has(s.day)) byDay.set(s.day, { day: s.day, visits: 0, installs: 0 });
       const row = byDay.get(s.day);
       if (row) row[kind] += n;
       sum += n;
@@ -86,7 +90,7 @@ export async function fetchStats(days = 30): Promise<{ daily: DailyStats[]; tota
     const total = Math.max(sum, h.count ?? 0);
     if (kind === 'visits') totalVisits += total; else totalInstalls += total;
   }
-  return { daily: [...byDay.values()].reverse(), totalVisits, totalInstalls };
+  return { daily: [...byDay.values()].sort((a, b) => b.day.localeCompare(a.day)), totalVisits, totalInstalls };
 }
 
 // ---- Short admin password ----
