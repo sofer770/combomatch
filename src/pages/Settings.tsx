@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ConfirmDialog, PageTitle } from '../components/ui';
 import { store, useDb, useUi } from '../state/AppContext';
-import { ExportDialog } from '../components/ExportDialog';
 
 function Toggle({ id, label, help, checked, onChange }: { id: string; label: string; help: string; checked: boolean; onChange: (v: boolean) => void }) {
   return (
@@ -23,7 +22,6 @@ export default function Settings() {
   const db = useDb();
   const { toast } = useUi();
   const [confirmReset, setConfirmReset] = useState(false);
-  const [exporting, setExporting] = useState(false);
   const s = db.settings;
 
   return (
@@ -43,10 +41,9 @@ export default function Settings() {
       <section className="card mt-4 p-4 sm:p-5">
         <h2 className="font-semibold">נתונים</h2>
         <p className="mt-1 text-sm text-muted">
-          כל הנתונים נשמרים במכשיר הזה בלבד (ללא הרשמה וללא שרת). מומלץ לייצא גיבוי מדי פעם.
+          הארוחות, ההיסטוריה והשינויים שלכם נשמרים במכשיר הזה בלבד, ללא הרשמה וללא שרת.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
-          <button className="btn-soft" onClick={() => setExporting(true)}>ייצוא גיבוי מלא</button>
           <button className="btn-danger" onClick={() => setConfirmReset(true)}>איפוס כל הנתונים</button>
         </div>
         {store.getPersistError() && <p role="alert" className="mt-3 text-sm text-bad">{store.getPersistError()}</p>}
@@ -56,8 +53,6 @@ export default function Settings() {
         <Link to="/admin" className="text-xs text-muted underline-offset-2 hover:underline">כניסת מנהל</Link>
       </div>
 
-      <ExportDialog open={exporting} onClose={() => setExporting(false)} title="גיבוי מלא"
-        filename={`combomatch-backup-${new Date().toISOString().slice(0, 10)}.json`} text={exporting ? store.exportAll() : ''} />
       <ConfirmDialog open={confirmReset} onClose={() => setConfirmReset(false)} danger title="איפוס כל הנתונים" confirmLabel="איפוס"
         text="כל הארוחות השמורות, ההיסטוריה, המזונות שהוספתם והשינויים בכללים יימחקו, והאפליקציה תחזור למצב ההתחלתי."
         onConfirm={() => { store.resetAll(); toast('הנתונים אופסו'); }} />
