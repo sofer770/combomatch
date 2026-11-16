@@ -40,6 +40,7 @@ export default function Home() {
       <section className="mb-6 text-center sm:mb-8">
         <img src={logo} alt="" width={112} height={112} className="mx-auto mb-3 h-24 w-24 animate-pop sm:h-28 sm:w-28" />
         <h1 className="text-4xl font-bold tracking-tight text-leaf-dark sm:text-5xl">ComboMatch</h1>
+        <p className="mt-1 text-xl font-semibold text-ink sm:text-2xl">שילובי וצירופי מזון</p>
         <p className="mt-2 text-lg text-muted">בודקים צירוף. אוכלים בראש שקט</p>
       </section>
 
