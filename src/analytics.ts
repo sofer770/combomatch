@@ -52,7 +52,7 @@ export function trackOpen() {
 
 export interface DailyStats { day: string; visits: number; installs: number }
 
-interface HitsResponse { hits?: { path: string; count: number; stats?: { day: string; daily: number }[] }[] }
+interface HitsResponse { hits?: { path: string; count?: number; stats?: { day: string; daily?: number; hourly?: number[] }[] }[] }
 
 /** Reads the last `days` days of counts with the owner's read-only API key. */
 export async function fetchStats(days = 30): Promise<{ daily: DailyStats[]; totalVisits: number; totalInstalls: number }> {
@@ -61,7 +61,7 @@ export async function fetchStats(days = 30): Promise<{ daily: DailyStats[]; tota
   const end = new Date();
   const start = new Date(end.getTime() - (days - 1) * 86400000);
   const ymd = (d: Date) => d.toISOString().slice(0, 10);
-  const url = `https://${GOATCOUNTER_CODE}.goatcounter.com/api/v0/stats/hits?start=${ymd(start)}&end=${ymd(end)}&limit=100`;
+  const url = `https://${GOATCOUNTER_CODE}.goatcounter.com/api/v0/stats/hits?start=${ymd(start)}&end=${ymd(end)}&limit=100&daily=true`;
   const res = await fetch(url, { headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' } });
   if (res.status === 401 || res.status === 403) throw new Error('המפתח אינו תקין או שאין לו הרשאת צפייה בסטטיסטיקה');
   if (!res.ok) throw new Error(`שגיאה בקבלת הנתונים (${res.status})`);
@@ -75,11 +75,16 @@ export async function fetchStats(days = 30): Promise<{ daily: DailyStats[]; tota
   for (const h of data.hits ?? []) {
     const kind = h.path.replace(/^\//, '') === VISIT_PATH ? 'visits' : h.path.replace(/^\//, '') === INSTALL_PATH ? 'installs' : null;
     if (!kind) continue;
+    let sum = 0;
     for (const s of h.stats ?? []) {
+      // `daily` is filled when grouping by day; fall back to adding up the hourly counts
+      const n = s.daily || (s.hourly ?? []).reduce((a, b) => a + b, 0);
       const row = byDay.get(s.day);
-      if (row) row[kind] += s.daily;
-      if (kind === 'visits') totalVisits += s.daily; else totalInstalls += s.daily;
+      if (row) row[kind] += n;
+      sum += n;
     }
+    const total = Math.max(sum, h.count ?? 0);
+    if (kind === 'visits') totalVisits += total; else totalInstalls += total;
   }
   return { daily: [...byDay.values()].reverse(), totalVisits, totalInstalls };
 }
