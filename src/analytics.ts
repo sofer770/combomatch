@@ -83,3 +83,39 @@ export async function fetchStats(days = 30): Promise<{ daily: DailyStats[]; tota
   }
   return { daily: [...byDay.values()].reverse(), totalVisits, totalInstalls };
 }
+
+// ---- Short admin password ----
+// The long API token is stored encrypted with the owner's short password (PBKDF2 + AES-GCM).
+// Typing the password on any device decrypts the token and saves it on that device.
+// The token only allows reading visit counts.
+
+/** Encrypted token, created on the admin screen ("סיסמה קצרה") and pasted here. Empty = not set. */
+export const ADMIN_LOCK = '';
+
+const b64 = (u: Uint8Array) => btoa(String.fromCharCode(...u));
+const unb64 = (s: string) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
+
+async function deriveKey(password: string, salt: Uint8Array) {
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 300000, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+}
+
+export async function lockToken(token: string, password: string): Promise<string> {
+  const salt = crypto.getRandomValues(new Uint8Array(16));
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const key = await deriveKey(password, salt);
+  const c = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(token)));
+  return `${b64(salt)}.${b64(iv)}.${b64(c)}`;
+}
+
+/** Returns the token if the password is right, otherwise null. */
+export async function unlockToken(password: string, lock = ADMIN_LOCK): Promise<string | null> {
+  if (!lock) return null;
+  try {
+    const [s, i, c] = lock.split('.').map(unb64);
+    const key = await deriveKey(password, s);
+    return new TextDecoder().decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: i }, key, c));
+  } catch {
+    return null;
+  }
+}
