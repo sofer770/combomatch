@@ -183,6 +183,7 @@ export default function Result() {
       <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
         <button className="btn-soft" onClick={() => setSwapChooser(true)}>🔄 החלף רכיב</button>
         <button className="btn-soft" onClick={() => setSaving(true)}>⭐ שמור כארוחה קבועה</button>
+        <Link className="btn-soft" to={`/export?f=${ids.join(',')}`}>📄 שמירה כ-PDF</Link>
         <button className="btn-soft" aria-expanded={details} onClick={() => setDetails(!details)}>
           📋 {details ? 'הסתר הסבר מפורט' : 'הצג הסבר מפורט'}
         </button>

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import type { Food, Level } from '../domain/types';
+import { LEVEL_SEVERITY } from '../domain/types';
 import { evaluateMeal, LEVEL_TEXT, type CheckResult } from '../engine/ruleEngine';
 import { DISCLAIMER, formatDate, LEVEL_STYLE, PageTitle } from '../components/ui';
 import { resolveFoods, store, useDb, useFoodMap } from '../state/AppContext';
@@ -22,7 +23,7 @@ function Verdict({ level }: { level: Level }) {
 function PairList({ result }: { result: CheckResult }) {
   return (
     <ul className="mt-2 space-y-1 text-sm">
-      {result.pairs.map((p) => (
+      {[...result.pairs].sort((a, b) => LEVEL_SEVERITY[b.level] - LEVEL_SEVERITY[a.level]).map((p) => (
         <li key={`${p.foodA.id}-${p.foodB.id}`} className="flex gap-2">
           <span className={`mt-0.5 shrink-0 font-bold ${LEVEL_STYLE[p.level].text}`} aria-hidden>{LEVEL_STYLE[p.level].symbol}</span>
           <span>
@@ -41,8 +42,12 @@ export default function Export() {
   const rules = useMemo(() => store.effectiveRules(db), [db]);
   const [params] = useSearchParams();
   const initial = params.get('include');
-  const [withMeals, setWithMeals] = useState(initial !== 'history');
-  const [withHistory, setWithHistory] = useState(initial !== 'meals');
+  const currentIds = (params.get('f') ?? '').split(',').filter(Boolean);
+  const currentFoods = resolveFoods(currentIds, foodMap);
+  const current = currentFoods.length >= 2 ? safeEval(currentFoods, rules) : null;
+  const [withCurrent, setWithCurrent] = useState(!!current);
+  const [withMeals, setWithMeals] = useState(!current && initial !== 'history');
+  const [withHistory, setWithHistory] = useState(!current && initial !== 'meals');
   const [historyLimit, setHistoryLimit] = useState(20);
 
   const meals = db.savedMeals.map((m) => {
@@ -50,7 +55,7 @@ export default function Export() {
     return { meal: m, foods, result: safeEval(foods, rules) };
   });
   const history = db.history.slice(0, historyLimit);
-  const nothing = (!withMeals || meals.length === 0) && (!withHistory || history.length === 0);
+  const nothing = (!withCurrent || !current) && (!withMeals || meals.length === 0) && (!withHistory || history.length === 0);
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -59,6 +64,7 @@ export default function Export() {
         <section className="card p-4 sm:p-5">
           <fieldset className="flex flex-wrap gap-x-6 gap-y-3">
             <legend className="sr-only">מה לכלול</legend>
+            {current && <label className="flex items-center gap-2"><input type="checkbox" className="h-5 w-5 accent-[rgb(var(--leaf))]" checked={withCurrent} onChange={(e) => setWithCurrent(e.target.checked)} />הבדיקה הנוכחית</label>}
             <label className="flex items-center gap-2"><input type="checkbox" className="h-5 w-5 accent-[rgb(var(--leaf))]" checked={withMeals} onChange={(e) => setWithMeals(e.target.checked)} />ארוחות קבועות ({meals.length})</label>
             <label className="flex items-center gap-2"><input type="checkbox" className="h-5 w-5 accent-[rgb(var(--leaf))]" checked={withHistory} onChange={(e) => setWithHistory(e.target.checked)} />היסטוריית בדיקות ({db.history.length})</label>
             {withHistory && db.history.length > 0 && (
@@ -92,6 +98,17 @@ export default function Export() {
         </header>
 
         {nothing && <p className="py-8 text-center text-muted">אין עדיין נתונים לייצוא. שמרו ארוחה או בצעו בדיקה, וחזרו לכאן.</p>}
+
+        {withCurrent && current && (
+          <section className="mt-5 break-inside-avoid">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h2 className="text-lg font-semibold">בדיקת צירוף</h2>
+              <Verdict level={current.level} />
+            </div>
+            <p className="mt-1">{currentFoods.map((f) => `${f.icon} ${f.nameHe}`).join('  ·  ')}</p>
+            <PairList result={current} />
+          </section>
+        )}
 
         {withMeals && meals.length > 0 && (
           <section className="mt-5">
