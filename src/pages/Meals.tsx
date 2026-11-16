@@ -28,6 +28,9 @@ export default function Meals() {
   return (
     <div className="mx-auto max-w-3xl">
       <PageTitle title="ארוחות קבועות" subtitle="שילובים שאתם אוכלים לעיתים קרובות. לחיצה על ארוחה טוענת אותה למסך הבית." />
+      {db.savedMeals.length > 0 && (
+        <div className="-mt-2 mb-4"><Link to="/export?include=meals" className="btn-soft px-4 py-2 text-sm">📄 ייצוא ל-PDF</Link></div>
+      )}
       {db.savedMeals.length === 0 ? (
         <EmptyState icon="⭐" title="עדיין אין ארוחות שמורות"
           text='אחרי בדיקת צירוף, לחצו על "שמור כארוחה קבועה" כדי לשמור אותו כאן.'

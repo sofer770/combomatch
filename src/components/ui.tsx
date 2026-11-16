@@ -148,7 +148,7 @@ export function PageTitle({ title, subtitle, actions }: { title: string; subtitl
 export function Toaster() {
   const { toasts } = useUi();
   return (
-    <div aria-live="polite" className="pointer-events-none fixed inset-x-0 bottom-20 z-[60] flex flex-col items-center gap-2 px-4 sm:bottom-6">
+    <div aria-live="polite" className="print:hidden pointer-events-none fixed inset-x-0 bottom-20 z-[60] flex flex-col items-center gap-2 px-4 sm:bottom-6">
       {toasts.map((t) => (
         <div
           key={t.id}

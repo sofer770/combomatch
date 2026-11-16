@@ -26,7 +26,12 @@ export default function History() {
     <div className="mx-auto max-w-3xl">
       <PageTitle title="היסטוריית בדיקות"
         subtitle={db.settings.saveHistory ? 'כל בדיקה נשמרת עם הכללים שהופעלו וגרסת הכללים באותו זמן.' : 'שמירת ההיסטוריה כבויה בהגדרות.'}
-        actions={db.history.length > 0 && <button className="btn-danger text-sm" onClick={() => setConfirmClear(true)}>ניקוי היסטוריה</button>} />
+        actions={db.history.length > 0 && (
+          <div className="flex flex-wrap gap-2">
+            <Link to="/export?include=history" className="btn-soft text-sm">📄 ייצוא ל-PDF</Link>
+            <button className="btn-danger text-sm" onClick={() => setConfirmClear(true)}>ניקוי היסטוריה</button>
+          </div>
+        )} />
 
       {db.history.length === 0 ? (
         <EmptyState icon="🕒" title="עדיין אין בדיקות" text="כל צירוף שתבדקו יופיע כאן." action={<Link to="/" className="btn-primary">לבדיקת צירוף</Link>} />

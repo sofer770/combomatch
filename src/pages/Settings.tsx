@@ -44,6 +44,7 @@ export default function Settings() {
           הארוחות, ההיסטוריה והשינויים שלכם נשמרים במכשיר הזה בלבד, ללא הרשמה וללא שרת.
         </p>
         <div className="mt-3 flex flex-wrap gap-2">
+          <Link to="/export" className="btn-soft">📄 ייצוא ל-PDF</Link>
           <button className="btn-danger" onClick={() => setConfirmReset(true)}>איפוס כל הנתונים</button>
         </div>
         {store.getPersistError() && <p role="alert" className="mt-3 text-sm text-bad">{store.getPersistError()}</p>}

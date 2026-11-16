@@ -10,6 +10,7 @@ import History from './pages/History';
 import Foods from './pages/Foods';
 import Settings from './pages/Settings';
 import Admin from './pages/Admin';
+import Export from './pages/Export';
 import { isAdmin } from './analytics';
 import { useDb } from './state/AppContext';
 import logo from './assets/logo.png';
@@ -46,7 +47,7 @@ export default function App() {
     <div className="min-h-screen pb-24 sm:pb-8">
       <ScrollTop />
       <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:start-2 focus:top-2 focus:z-50 focus:rounded-lg focus:bg-surface focus:p-2">דלג לתוכן</a>
-      <header className="sticky top-0 z-40 border-b border-line/70 bg-bg/85 backdrop-blur">
+      <header className="print:hidden sticky top-0 z-40 border-b border-line/70 bg-bg/85 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
           <Link to="/" className="flex items-center gap-2 font-bold text-leaf-dark">
             <img src={logo} alt="" width={40} height={40} className="h-10 w-10" />
@@ -85,11 +86,12 @@ export default function App() {
           <Route path="/foods" element={<Foods />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/export" element={<Export />} />
           <Route path="*" element={<div className="py-20 text-center"><p className="text-lg">הדף לא נמצא</p><Link to="/" className="btn-primary mt-4">למסך הבית</Link></div>} />
         </Routes>
       </main>
 
-      <footer className="mx-auto mt-10 max-w-3xl px-4 text-center">
+      <footer className="print:hidden mx-auto mt-10 max-w-3xl px-4 text-center">
         <p className="text-xs text-muted">{DISCLAIMER}</p>
         <div className="mt-4 border-t border-line pt-4 text-sm text-ink/80">
           <a href={SITE_URL} target="_blank" rel="noopener noreferrer" className="mx-auto mb-2 block w-fit" aria-label="המרכז לבריאות טבעית">
@@ -111,7 +113,7 @@ export default function App() {
         </div>
       </footer>
 
-      <nav aria-label="ניווט תחתון" className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur sm:hidden">
+      <nav aria-label="ניווט תחתון" className="print:hidden fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur sm:hidden">
         <div className="grid grid-cols-5">
           {NAV.map((n) => (
             <NavLink key={n.to} to={n.to} end={n.end}
