@@ -177,7 +177,7 @@ export function familyName(families: FoodFamily[], id: Id) {
 /** One-line human summary of a result, used in history and saved meals. */
 export function summarize(result: CheckResult, families: FoodFamily[]): string {
   const bad = result.pairs.filter((p) => p.level === result.level);
-  if (result.level === 'green') return 'על פי כללי השיטה שהוגדרו באפליקציה, כל הזוגות בארוחה מתאימים.';
+  if (result.level === 'green') return 'על פי כללי שיטת הבריאות הטבעית שהוגדרו באפליקציה, כל הזוגות בארוחה מתאימים.';
   const parts = bad.map((p) => {
     const c = p.decisive;
     const fam = `${familyName(families, c.familyA)} + ${familyName(families, c.familyB)}`;
@@ -185,5 +185,5 @@ export function summarize(result: CheckResult, families: FoodFamily[]): string {
   });
   if (result.level === 'unknown') return `אין כלל מוגדר עבור: ${parts.join('; ')}.`;
   if (result.level === 'yellow') return `הסתייגות לפי הכללים: ${parts.join('; ')}.`;
-  return `על פי כללי השיטה שהוגדרו באפליקציה, השילוב אינו מומלץ: ${parts.join('; ')}.`;
+  return `על פי כללי שיטת הבריאות הטבעית שהוגדרו באפליקציה, השילוב אינו מומלץ: ${parts.join('; ')}.`;
 }

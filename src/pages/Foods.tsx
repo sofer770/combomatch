@@ -72,7 +72,7 @@ export default function Foods() {
                 </p>
                 <p className="mt-1 flex flex-wrap gap-1 text-xs">
                   {f.classificationStatus === 'verified'
-                    ? <span className="rounded-full bg-leaf-soft px-2 py-0.5 text-leaf-dark">מופיע במסמך השיטה</span>
+                    ? <span className="rounded-full bg-leaf-soft px-2 py-0.5 text-leaf-dark">מופיע במסמך שיטת הבריאות הטבעית</span>
                     : <span className="rounded-full bg-earth-soft px-2 py-0.5 text-earth" title={f.classificationNote}>סיווג טעון אימות</span>}
                   {f.custom && <span className="rounded-full bg-cream px-2 py-0.5">נוסף ידנית</span>}
                   {!f.active && <span className="rounded-full bg-unk-soft px-2 py-0.5">לא פעיל</span>}

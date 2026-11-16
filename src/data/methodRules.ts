@@ -11,9 +11,9 @@ import matrix from './method-matrix.json';
  */
 
 export const METHOD_MATRIX_VERSION = matrix.version;
-export const METHOD_SOURCE_DOC = 'מסמך השיטה: מהי שיטת צירופי המזון';
+export const METHOD_SOURCE_DOC = 'מסמך שיטת הבריאות הטבעית: מהי שיטת צירופי המזון';
 
-const RED_SUGGESTION = 'לפי השיטה, הפרידו את הרכיבים לארוחות נפרדות, או החליפו אחד מהם ברכיב שמשתלב לפי הכללים.';
+const RED_SUGGESTION = 'לפי שיטת הבריאות הטבעית, הפרידו את הרכיבים לארוחות נפרדות, או החליפו אחד מהם ברכיב שמשתלב לפי הכללים.';
 
 // sourced = decided from a cited external source (Shelton) at the practitioner's request.
 const statusMap: Record<string, VerificationStatus> = { explicit: 'verified', sourced: 'verified', inferred: 'unverified' };
@@ -26,7 +26,7 @@ export const METHOD_RULES: CombinationRule[] = matrix.rules
     familyB: r.familyB,
     level: r.level as CombinationRule['level'],
     title: r.explanation.replace(/\.$/, ''),
-    explanation: r.status === 'sourced' ? r.explanation : `על פי כללי השיטה: ${r.explanation}`,
+    explanation: r.status === 'sourced' ? r.explanation : `על פי כללי שיטת הבריאות הטבעית: ${r.explanation}`,
     suggestion: r.level === 'red' ? RED_SUGGESTION : '',
     source: r.status === 'sourced' ? r.source : `${METHOD_SOURCE_DOC} (${r.source})`,
     verificationStatus: statusMap[r.status] ?? 'unverified',

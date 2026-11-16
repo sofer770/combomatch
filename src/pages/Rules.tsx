@@ -7,9 +7,9 @@ import { store, useDb, useUi } from '../state/AppContext';
 import { ExportDialog } from '../components/ExportDialog';
 
 const LEVEL_HELP: Record<Level, string> = {
-  green: 'שילוב מומלץ לפי כללי השיטה.',
-  yellow: 'שילוב שאינו אידיאלי או דורש תשומת לב. (מסמך השיטה אינו מגדיר רמה זו.)',
-  red: 'שילוב שאינו מומלץ לפי כללי השיטה.',
+  green: 'שילוב מומלץ לפי כללי שיטת הבריאות הטבעית.',
+  yellow: 'שילוב שאינו אידיאלי או דורש תשומת לב. (מסמך שיטת הבריאות הטבעית אינו מגדיר רמה זו.)',
+  red: 'שילוב שאינו מומלץ לפי כללי שיטת הבריאות הטבעית.',
   unknown: 'אין כלל מוגדר. האפליקציה לא מנחשת ומציגה "טרם הוגדר".',
 };
 
@@ -204,7 +204,7 @@ export default function Rules() {
           <button className="btn-soft" onClick={() => fileRef.current?.click()}>ייבוא מקובץ</button>
           <input ref={fileRef} type="file" accept=".json,application/json" className="hidden"
             onChange={(e) => { const f = e.target.files?.[0]; if (f) void onImport(f); e.target.value = ''; }} />
-          <button className="btn-ghost border border-line" onClick={() => setConfirmRestore(true)}>שחזור כללי השיטה המקוריים</button>
+          <button className="btn-ghost border border-line" onClick={() => setConfirmRestore(true)}>שחזור כללי שיטת הבריאות הטבעית המקוריים</button>
         </div>
       </section>
 
@@ -213,9 +213,9 @@ export default function Rules() {
         filename={`combomatch-rules-v${db.settings.rulesVersion}.json`} text={exporting ? store.exportRules() : ''} />
       <RuleEditor cell={cell} onClose={() => setCell(null)} rule={cell ? index.get(pairKey(cell.a.id, cell.b.id)) : undefined} />
       <FamilyEditor family={famEdit} onClose={() => setFamEdit(null)} />
-      <ConfirmDialog open={confirmRestore} onClose={() => setConfirmRestore(false)} title="שחזור כללי השיטה"
-        text="כל השינויים שביצעתם במטריצה יוחלפו בכללים המקוריים שנגזרו ממסמך השיטה. להמשיך?"
-        confirmLabel="שחזור" danger onConfirm={() => { store.restoreMethodRules(); toast('כללי השיטה שוחזרו'); }} />
+      <ConfirmDialog open={confirmRestore} onClose={() => setConfirmRestore(false)} title="שחזור כללי שיטת הבריאות הטבעית"
+        text="כל השינויים שביצעתם במטריצה יוחלפו בכללים המקוריים שנגזרו ממסמך שיטת הבריאות הטבעית. להמשיך?"
+        confirmLabel="שחזור" danger onConfirm={() => { store.restoreMethodRules(); toast('כללי שיטת הבריאות הטבעית שוחזרו'); }} />
     </div>
   );
 }
@@ -271,10 +271,10 @@ function RuleEditor({ cell, rule, onClose }: { cell: { a: FoodFamily; b: FoodFam
             <p className="text-ink/80">{rule.explanation}</p>
             {rule.suggestion && <p className="text-sm"><strong>הצעת שיפור:</strong> {rule.suggestion}</p>}
             <p className="text-xs text-muted">מקור: {rule.source} · עודכן: {new Date(rule.updatedAt).toLocaleDateString('he-IL')} · מזהה: {rule.id}</p>
-            {isDemo && <p className="rounded-xl bg-warn-soft px-3 py-2 text-sm">זהו כלל הדגמה בלבד, ואינו חלק מהשיטה. ניתן להגדיר במקומו כלל אמיתי.</p>}
+            {isDemo && <p className="rounded-xl bg-warn-soft px-3 py-2 text-sm">זהו כלל הדגמה בלבד, ואינו חלק משיטת הבריאות הטבעית. ניתן להגדיר במקומו כלל אמיתי.</p>}
           </div>
         ) : (
-          <p className="text-ink/80">טרם הוגדר כלל לצירוף זה. מסמך השיטה אינו מתייחס אליו במפורש, ולכן הבדיקה תציג "טרם הוגדר".</p>
+          <p className="text-ink/80">טרם הוגדר כלל לצירוף זה. מסמך שיטת הבריאות הטבעית אינו מתייחס אליו במפורש, ולכן הבדיקה תציג "טרם הוגדר".</p>
         )
       ) : (
         <div className="grid gap-4">
@@ -290,7 +290,7 @@ function RuleEditor({ cell, rule, onClose }: { cell: { a: FoodFamily; b: FoodFam
             </div>
           </fieldset>
           <div><label className="label" htmlFor="r-title">כותרת קצרה</label><input id="r-title" className="input" value={d.title} onChange={(e) => setD({ ...d, title: e.target.value })} /></div>
-          <div><label className="label" htmlFor="r-exp">הסבר מפורט</label><textarea id="r-exp" rows={3} className="input" value={d.explanation} onChange={(e) => setD({ ...d, explanation: e.target.value })} placeholder="על פי כללי השיטה..." /></div>
+          <div><label className="label" htmlFor="r-exp">הסבר מפורט</label><textarea id="r-exp" rows={3} className="input" value={d.explanation} onChange={(e) => setD({ ...d, explanation: e.target.value })} placeholder="על פי כללי שיטת הבריאות הטבעית..." /></div>
           <div><label className="label" htmlFor="r-sug">הצעת שיפור</label><input id="r-sug" className="input" value={d.suggestion} onChange={(e) => setD({ ...d, suggestion: e.target.value })} /></div>
           <div className="grid gap-4 sm:grid-cols-2">
             <div><label className="label" htmlFor="r-src">מקור הכלל</label><input id="r-src" className="input" value={d.source} onChange={(e) => setD({ ...d, source: e.target.value })} /></div>

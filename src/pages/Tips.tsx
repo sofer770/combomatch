@@ -5,7 +5,7 @@ import { TIPS } from '../data/tips';
 export default function Tips() {
   return (
     <div className="mx-auto max-w-2xl">
-      <PageTitle title="טיפים מהשיטה" subtitle="מעבר לצירופים עצמם: מתי לאכול, כמה להמתין בין ארוחות ואיך לבנות את היום." />
+      <PageTitle title="טיפים משיטת הבריאות הטבעית" subtitle="מעבר לצירופים עצמם: מתי לאכול, כמה להמתין בין ארוחות ואיך לבנות את היום." />
       <ul className="grid gap-3 sm:grid-cols-2">
         {TIPS.map((t) => (
           <li key={t.id} className="card p-4">

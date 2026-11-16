@@ -38,7 +38,7 @@ export function LevelDot({ level }: { level: Level }) {
 export function VerificationTag({ status }: { status: VerificationStatus | null }) {
   if (status === 'verified') return <span className="rounded-full bg-leaf-soft px-2 py-0.5 text-xs text-leaf-dark">מאומת לפי מקור</span>;
   if (status === 'unverified') return <span className="rounded-full bg-earth-soft px-2 py-0.5 text-xs text-earth">פרשנות, טעון אימות</span>;
-  if (status === 'demo') return <span className="rounded-full bg-warn-soft px-2 py-0.5 text-xs text-warn">נתוני הדגמה, לא כלל השיטה</span>;
+  if (status === 'demo') return <span className="rounded-full bg-warn-soft px-2 py-0.5 text-xs text-warn">נתוני הדגמה, לא כלל שיטת הבריאות הטבעית</span>;
   return <span className="rounded-full bg-unk-soft px-2 py-0.5 text-xs text-unk">טרם הוגדר</span>;
 }
 
@@ -165,7 +165,7 @@ export function Toaster() {
 }
 
 export const DISCLAIMER =
-  'האפליקציה מבוססת על כללי צירופי מזון של השיטה ואינה מהווה ייעוץ רפואי או תחליף לייעוץ של איש מקצוע מוסמך.';
+  'האפליקציה מבוססת על כללי צירופי מזון של שיטת הבריאות הטבעית ואינה מהווה ייעוץ רפואי או תחליף לייעוץ של איש מקצוע מוסמך.';
 
 export function formatDate(iso: string) {
   try {

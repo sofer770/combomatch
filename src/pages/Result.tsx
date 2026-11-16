@@ -13,9 +13,9 @@ import { EmptyState, LEVEL_STYLE, LevelBadge, LevelDot, Modal, VerificationTag }
 import { resolveFoods, store, useDb, useFoodMap, useUi } from '../state/AppContext';
 
 const HERO_TEXT = {
-  green: { head: 'צירוף מתאים', body: 'על פי כללי השיטה שהוגדרו באפליקציה, כל הזוגות בארוחה מתאימים לשילוב.' },
-  yellow: { head: 'צירוף עם הסתייגות', body: 'על פי כללי השיטה שהוגדרו באפליקציה, יש בארוחה שילוב שדורש תשומת לב.' },
-  red: { head: 'כדאי לשקול שינוי בצירוף', body: 'על פי כללי השיטה שהוגדרו באפליקציה, השילוב בין משפחות המזון הללו אינו מומלץ.' },
+  green: { head: 'צירוף מתאים', body: 'על פי כללי שיטת הבריאות הטבעית שהוגדרו באפליקציה, כל הזוגות בארוחה מתאימים לשילוב.' },
+  yellow: { head: 'צירוף עם הסתייגות', body: 'על פי כללי שיטת הבריאות הטבעית שהוגדרו באפליקציה, יש בארוחה שילוב שדורש תשומת לב.' },
+  red: { head: 'כדאי לשקול שינוי בצירוף', body: 'על פי כללי שיטת הבריאות הטבעית שהוגדרו באפליקציה, השילוב בין משפחות המזון הללו אינו מומלץ.' },
   unknown: { head: 'המידע אינו מוגדר', body: 'לחלק מהזוגות בארוחה אין עדיין כלל מוגדר במטריצה, ולכן האפליקציה לא מנחשת תוצאה.' },
 } as const;
 
@@ -185,7 +185,7 @@ export default function Result() {
         const tips = tipsForFamilies(foods.flatMap((f) => f.familyIds));
         return tips.length > 0 && (
           <section className="card mt-4 border-s-4 border-leaf p-4 sm:p-5" aria-labelledby="tip-title">
-            <h2 id="tip-title" className="font-semibold">💡 טיפ מהשיטה</h2>
+            <h2 id="tip-title" className="font-semibold">💡 טיפ משיטת הבריאות הטבעית</h2>
             <ul className="mt-2 space-y-2">
               {tips.map((t) => (
                 <li key={t.id} className="flex gap-2">
@@ -240,7 +240,7 @@ export default function Result() {
           </div>
           {unverifiedFoods.length > 0 && (
             <p className="mt-3 rounded-xl bg-earth-soft px-3 py-2 text-earth">
-              הסיווג של {unverifiedFoods.map((f) => f.nameHe).join(', ')} למשפחת מזון טרם אומת מול מסמך השיטה.
+              הסיווג של {unverifiedFoods.map((f) => f.nameHe).join(', ')} למשפחת מזון טרם אומת מול מסמך שיטת הבריאות הטבעית.
             </p>
           )}
         </section>
