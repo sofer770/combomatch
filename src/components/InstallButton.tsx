@@ -3,7 +3,11 @@ import { canPromptInstall, isIos, onInstallChange, promptInstall } from '../inst
 import { isStandalone } from '../analytics';
 import { Modal } from './ui';
 
-/** "Install as an app" button. Hidden inside the installed app and where installing is not possible. */
+/**
+ * "Install as an app" button, shown to everyone except inside the installed app.
+ * Where the browser offers its install prompt (Chrome on Android/desktop) it installs directly;
+ * otherwise (iPhone, incognito, other browsers) it shows short manual steps.
+ */
 export function InstallButton({ className = '' }: { className?: string }) {
   const [, force] = useState(0);
   const [help, setHelp] = useState(false);
@@ -11,20 +15,27 @@ export function InstallButton({ className = '' }: { className?: string }) {
 
   if (isStandalone()) return null;
   const ios = isIos();
-  if (!canPromptInstall() && !ios) return null;
 
   return (
     <>
       <button type="button" className={`btn-soft ${className}`}
-        onClick={() => (ios ? setHelp(true) : void promptInstall())}>
+        onClick={() => (canPromptInstall() ? void promptInstall() : setHelp(true))}>
         📲 התקנה כאפליקציה
       </button>
-      <Modal open={help} onClose={() => setHelp(false)} title="התקנה באייפון">
-        <ol className="list-decimal space-y-2 ps-5 text-ink/90">
-          <li>פתחו את האתר בדפדפן Safari.</li>
-          <li>לחצו על כפתור השיתוף (ריבוע עם חץ למעלה) בתחתית המסך.</li>
-          <li>גללו ובחרו "הוספה למסך הבית", ואז "הוספה".</li>
-        </ol>
+      <Modal open={help} onClose={() => setHelp(false)} title="התקנה כאפליקציה">
+        {ios ? (
+          <ol className="list-decimal space-y-2 ps-5 text-ink/90">
+            <li>פתחו את האתר בדפדפן Safari.</li>
+            <li>לחצו על כפתור השיתוף (ריבוע עם חץ למעלה).</li>
+            <li>בחרו "הוספה למסך הבית", ואז "הוספה".</li>
+          </ol>
+        ) : (
+          <ol className="list-decimal space-y-2 ps-5 text-ink/90">
+            <li>פתחו את האתר בדפדפן Chrome, בחלון רגיל (לא בגלישה בסתר ולא מתוך וואטסאפ).</li>
+            <li>לחצו על שלוש הנקודות ⋮ בפינת המסך.</li>
+            <li>בחרו "התקנת אפליקציה" (או "הוספה למסך הבית"), ואז "התקנה".</li>
+          </ol>
+        )}
         <p className="mt-3 text-sm text-muted">האפליקציה תופיע כאייקון במסך הבית ותיפתח במסך מלא, בלי שורת כתובת.</p>
       </Modal>
     </>
