@@ -55,6 +55,16 @@ export interface DailyStats { day: string; visits: number; installs: number }
 interface HitsResponse { hits?: { path: string; count?: number; stats?: { day: string; daily?: number; hourly?: number[] }[] }[] }
 
 /** Reads the last `days` days of counts with the owner's read-only API key. */
+/** Counting started in November 2026; totals are counted from here. */
+const COUNTING_START = new Date(2026, 10, 1);
+
+/** Visits and installs since counting started. */
+export async function fetchAllTimeTotals(): Promise<{ visits: number; installs: number }> {
+  const days = Math.ceil((Date.now() - COUNTING_START.getTime()) / 86400000) + 1;
+  const r = await fetchStats(days);
+  return { visits: r.totalVisits, installs: r.totalInstalls };
+}
+
 export async function fetchStats(days = 30): Promise<{ daily: DailyStats[]; totalVisits: number; totalInstalls: number }> {
   const key = getAdminKey();
   if (!key || !GOATCOUNTER_CODE) throw new Error('חסר קוד מונה או מפתח מנהל');

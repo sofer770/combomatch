@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PageTitle } from '../components/ui';
-import { ADMIN_LOCK, fetchStats, getAdminKey, GOATCOUNTER_CODE, isAdmin, lockToken, setAdminKey, unlockToken, type DailyStats } from '../analytics';
+import { ADMIN_LOCK, fetchStats, fetchAllTimeTotals, getAdminKey, GOATCOUNTER_CODE, isAdmin, lockToken, setAdminKey, unlockToken, type DailyStats } from '../analytics';
 
 const fmtDay = (d: string) => new Date(`${d}T12:00:00`).toLocaleDateString('he-IL', { weekday: 'short', day: 'numeric', month: 'numeric' });
 
@@ -30,13 +30,13 @@ export default function Admin() {
     }
     setAdmin(true);
   };
-  const [state, setState] = useState<{ loading: boolean; error?: string; daily?: DailyStats[]; totalVisits?: number; totalInstalls?: number; at?: Date }>({ loading: false });
+  const [state, setState] = useState<{ loading: boolean; error?: string; daily?: DailyStats[]; totalVisits?: number; totalInstalls?: number; allVisits?: number; allInstalls?: number; at?: Date }>({ loading: false });
 
   const load = useCallback(async () => {
     setState((s) => ({ ...s, loading: true, error: undefined }));
     try {
-      const r = await fetchStats(30);
-      setState({ loading: false, ...r, at: new Date() });
+      const [r, all] = await Promise.all([fetchStats(30), fetchAllTimeTotals()]);
+      setState({ loading: false, ...r, allVisits: all.visits, allInstalls: all.installs, at: new Date() });
     } catch (e) {
       setState({ loading: false, error: e instanceof Error ? e.message : 'שגיאה' });
     }
@@ -69,11 +69,19 @@ export default function Admin() {
       {!GOATCOUNTER_CODE && <p className="card mb-4 p-4 text-sm text-bad">המונה עדיין לא הוגדר באפליקציה.</p>}
       {state.error && <p role="alert" className="card mb-4 p-4 text-sm text-bad">{state.error}</p>}
 
+      <div className="mb-3 flex flex-wrap items-center gap-2">
+        <button className="btn-primary" onClick={() => void load()} disabled={state.loading}>{state.loading ? 'מרענן…' : '🔄 רענון'}</button>
+        {state.at && <span className="text-xs text-muted">עודכן בשעה {state.at.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })}</span>}
+      </div>
+
       <section className="grid grid-cols-3 gap-2 sm:gap-3" aria-label="סיכום">
         {[
           { label: 'כניסות היום', value: today?.visits },
           { label: 'כניסות ב-30 יום', value: state.totalVisits },
-          { label: 'התקנות בטלפון', value: state.totalInstalls },
+          { label: 'כניסות כללי', value: state.allVisits },
+          { label: 'התקנות היום', value: today?.installs },
+          { label: 'התקנות ב-30 יום', value: state.totalInstalls },
+          { label: 'התקנות כללי', value: state.allInstalls },
         ].map((c) => (
           <div key={c.label} className="card p-3 text-center sm:p-4">
             <p className="text-3xl font-bold text-leaf-dark">{state.loading && c.value === undefined ? '…' : c.value ?? '-'}</p>
@@ -100,10 +108,7 @@ export default function Admin() {
           </tbody>
         </table>
       </section>
-      {state.at && <p className="mt-2 text-xs text-muted">עודכן בשעה {state.at.toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' })}</p>}
-
       <div className="mt-5 flex flex-wrap gap-2">
-        <button className="btn-primary" onClick={() => void load()} disabled={state.loading}>{state.loading ? 'מרענן…' : 'רענון'}</button>
         <Link to="/" className="btn-soft">לאפליקציה</Link>
         <button className="btn-ghost ms-auto text-sm text-muted" onClick={() => { setAdminKey(null); setAdmin(false); }}>יציאה ממצב מנהל</button>
       </div>
