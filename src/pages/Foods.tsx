@@ -4,6 +4,7 @@ import { normalizeHe } from '../engine/search';
 import { FoodForm } from '../components/FoodForm';
 import { ConfirmDialog, EmptyState, PageTitle } from '../components/ui';
 import { store, useDb, useFamilyMap, useUi } from '../state/AppContext';
+import { missingFoodLink } from '../share';
 
 type Filter = 'all' | 'unverified' | 'unclassified' | 'inactive' | string;
 
@@ -40,6 +41,10 @@ export default function Foods() {
     <div className="mx-auto max-w-4xl">
       <PageTitle title="מאגר המזונות" subtitle={`${db.foods.filter((f) => f.active).length} מזונות פעילים. כאן מוסיפים מזונות ומסווגים אותם למשפחות.`}
         actions={<button className="btn-primary" onClick={() => setEditing('new')}>+ מזון חדש</button>} />
+      <p className="-mt-2 mb-4 text-sm text-muted">
+        חסר מזון ברשימה?{' '}
+        <a href={missingFoodLink()} target="_blank" rel="noopener noreferrer" className="font-medium text-leaf-dark hover:underline">💬 חסר לי מזון, עדכנו אותנו</a>
+      </p>
 
       <div className="card mb-4 grid gap-3 p-3 sm:grid-cols-[1fr_16rem]">
         <input type="search" aria-label="סינון לפי שם" className="input" placeholder="חיפוש במאגר" value={q} onChange={(e) => setQ(e.target.value)} />

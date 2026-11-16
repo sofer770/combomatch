@@ -12,6 +12,10 @@ import Settings from './pages/Settings';
 import Admin from './pages/Admin';
 import Export from './pages/Export';
 import Why from './pages/Why';
+import Tips from './pages/Tips';
+import Accessibility from './pages/Accessibility';
+import Privacy from './pages/Privacy';
+import { shareApp } from './share';
 import { isAdmin } from './analytics';
 import { useDb } from './state/AppContext';
 import logo from './assets/logo.png';
@@ -61,6 +65,10 @@ export default function App() {
                 {n.label}{n.to === '/meals' && savedMeals.length > 0 && <span className="ms-1 text-xs">({savedMeals.length})</span>}
               </NavLink>
             ))}
+            <button type="button" onClick={() => void shareApp()}
+              className="rounded-full px-3 py-2 text-sm font-medium text-black hover:bg-cream dark:text-ink">
+              📤 שתפו חבר
+            </button>
           </nav>
           <div className="flex items-center gap-1">
           {admin && (
@@ -89,6 +97,9 @@ export default function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/export" element={<Export />} />
           <Route path="/why" element={<Why />} />
+          <Route path="/tips" element={<Tips />} />
+          <Route path="/accessibility" element={<Accessibility />} />
+          <Route path="/privacy" element={<Privacy />} />
           <Route path="*" element={<div className="py-20 text-center"><p className="text-lg">הדף לא נמצא</p><Link to="/" className="btn-primary mt-4">למסך הבית</Link></div>} />
         </Routes>
       </main>
@@ -112,11 +123,16 @@ export default function App() {
               0542135831
             </button>
           </p>
+          <p className="mt-2 flex justify-center gap-3 text-xs text-muted">
+            <Link to="/accessibility" className="hover:underline">הצהרת נגישות</Link>
+            <span aria-hidden>|</span>
+            <Link to="/privacy" className="hover:underline">מדיניות פרטיות</Link>
+          </p>
         </div>
       </footer>
 
       <nav aria-label="ניווט תחתון" className="print:hidden fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur sm:hidden">
-        <div className="grid grid-cols-5">
+        <div className="grid grid-cols-6">
           {NAV.map((n) => (
             <NavLink key={n.to} to={n.to} end={n.end}
               className={({ isActive }) => `flex flex-col items-center gap-0.5 py-2 text-[11px] text-black dark:text-ink ${isActive ? 'font-bold' : 'font-medium'}`}>
@@ -128,6 +144,11 @@ export default function App() {
               )}
             </NavLink>
           ))}
+          <button type="button" onClick={() => void shareApp()}
+            className="flex flex-col items-center gap-0.5 py-2 text-[11px] font-medium text-black dark:text-ink">
+            <span aria-hidden className="grid h-8 w-12 place-items-center rounded-full text-lg">📤</span>
+            שתפו
+          </button>
         </div>
       </nav>
       <ContactDialog open={contactOpen} onClose={() => setContactOpen(false)} />

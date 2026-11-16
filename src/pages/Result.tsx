@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import type { Food } from '../domain/types';
 import { LEVEL_SEVERITY } from '../domain/types';
+import { tipsForFamilies } from '../data/tips';
 import { suggestAlternatives } from '../engine/alternatives';
 import {
   CheckError, evaluateMeal, familyName, LEVEL_TEXT, SEVERITY_ORDER_TEXT, summarize, toAppliedRecords, type CheckResult,
@@ -179,6 +180,24 @@ export default function Result() {
           </p>
         </section>
       )}
+
+      {(() => {
+        const tips = tipsForFamilies(foods.flatMap((f) => f.familyIds));
+        return tips.length > 0 && (
+          <section className="card mt-4 border-s-4 border-leaf p-4 sm:p-5" aria-labelledby="tip-title">
+            <h2 id="tip-title" className="font-semibold">💡 טיפ מהשיטה</h2>
+            <ul className="mt-2 space-y-2">
+              {tips.map((t) => (
+                <li key={t.id} className="flex gap-2">
+                  <span aria-hidden>{t.icon}</span>
+                  <span><strong>{t.title}:</strong> {t.text}</span>
+                </li>
+              ))}
+            </ul>
+            <Link to="/tips" className="mt-2 inline-block text-sm font-medium text-leaf-dark hover:underline">לכל הטיפים ←</Link>
+          </section>
+        );
+      })()}
 
       <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
         <button className="btn-soft" onClick={() => setSwapChooser(true)}>🔄 החלף רכיב</button>

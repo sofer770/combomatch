@@ -3,6 +3,7 @@ import type { Food, Id } from '../domain/types';
 import { searchFoods } from '../engine/search';
 import { useDb } from '../state/AppContext';
 import { FoodForm } from './FoodForm';
+import { missingFoodLink } from '../share';
 
 /**
  * Hebrew type-ahead food search.
@@ -58,7 +59,10 @@ export function FoodSearch({ selectedIds, onPick, placeholder = 'הקלידו ש
             <div className="px-3 py-4 text-center">
               <p className="font-medium">לא נמצא מזון בשם "{q.trim()}"</p>
               <p className="mt-1 text-sm text-muted">אפשר להוסיף אותו למאגר ולסווג אותו למשפחת מזון.</p>
-              <button type="button" className="btn-soft mt-3" onClick={() => setAdding(true)}>+ הוספת "{q.trim()}" למאגר</button>
+              <div className="mt-3 flex flex-wrap justify-center gap-2">
+                <button type="button" className="btn-soft" onClick={() => setAdding(true)}>+ הוספת "{q.trim()}" למאגר</button>
+                <a className="btn-ghost border border-line" href={missingFoodLink(q.trim())} target="_blank" rel="noopener noreferrer">💬 חסר לי מזון, עדכנו אותנו</a>
+              </div>
             </div>
           ) : (
             results.map((f, i) => {

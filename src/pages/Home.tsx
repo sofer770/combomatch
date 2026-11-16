@@ -45,6 +45,7 @@ export default function Home() {
         <p className="mt-2 text-lg text-muted">בודקים צירוף. אוכלים בראש שקט</p>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           <Link to="/why" className="btn-soft">💡 למה חשוב לשמור על צירופי מזון?</Link>
+          <Link to="/tips" className="btn-soft">📌 טיפים מהשיטה</Link>
           <InstallButton />
         </div>
       </section>
