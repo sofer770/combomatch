@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { InstallButton } from '../components/InstallButton';
 import { ConfirmDialog, PageTitle } from '../components/ui';
 import { store, useDb, useUi } from '../state/AppContext';
 
@@ -50,6 +51,7 @@ export default function Settings() {
         {store.getPersistError() && <p role="alert" className="mt-3 text-sm text-bad">{store.getPersistError()}</p>}
       </section>
 
+      <div className="mt-4 text-center"><InstallButton /></div>
       <div className="mt-6 text-center">
         <Link to="/admin" className="text-xs text-muted underline-offset-2 hover:underline">כניסת מנהל</Link>
       </div>

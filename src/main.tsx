@@ -14,6 +14,7 @@ import '@fontsource/rubik/latin-700.css';
 import './index.css';
 import logo from './assets/logo.png';
 import { trackOpen } from './analytics';
+import './install';
 
 const icon = document.createElement('link');
 icon.rel = 'icon';
@@ -25,7 +26,7 @@ document.documentElement.lang = 'he';
 document.documentElement.dir = 'rtl';
 
 // Offline support + home-screen install on the hosted build (needs https, not the single file).
-if (import.meta.env.PROD && import.meta.env.MODE !== 'single' && 'serviceWorker' in navigator && location.protocol === 'https:') {
+if (import.meta.env.PROD && import.meta.env.MODE !== 'single' && 'serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
   });
