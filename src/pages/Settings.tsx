@@ -33,7 +33,7 @@ export default function Settings() {
         <div className="py-4">
           <label htmlFor="max" className="font-medium">מספר מזונות מרבי בבדיקה</label>
           <select id="max" className="input mt-2 w-auto" value={s.maxFoods} onChange={(e) => store.updateSettings({ maxFoods: Number(e.target.value) })}>
-            <option value={2}>2</option><option value={3}>3</option>
+            {[3, 4, 5, 6, 7, 8].map((n) => <option key={n} value={n}>{n}</option>)}
           </select>
         </div>
       </section>

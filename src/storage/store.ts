@@ -55,7 +55,7 @@ export function createSeedState(): DbState {
       rulesVersion: 1,
       rulesUpdatedAt: nowIso(),
       demoMode: false,
-      maxFoods: 3,
+      maxFoods: 6,
       minFoods: 2,
       saveHistory: true,
       disclaimerAccepted: false,
@@ -109,7 +109,7 @@ function migrate(raw: unknown): DbState | null {
       }),
       ...seed.foods.filter((f) => !have.has(f.id)),
     ];
-    settings = { ...settings, methodVersion: METHOD_MATRIX_VERSION, rulesVersion: settings.rulesVersion + 1, rulesUpdatedAt: nowIso() };
+    settings = { ...settings, maxFoods: Math.max(settings.maxFoods, 6), methodVersion: METHOD_MATRIX_VERSION, rulesVersion: settings.rulesVersion + 1, rulesUpdatedAt: nowIso() };
   }
   return {
     settings,

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import type { Food } from '../domain/types';
+import { LEVEL_SEVERITY } from '../domain/types';
 import { suggestAlternatives } from '../engine/alternatives';
 import {
   CheckError, evaluateMeal, familyName, LEVEL_TEXT, SEVERITY_ORDER_TEXT, summarize, toAppliedRecords, type CheckResult,
@@ -122,9 +123,9 @@ export default function Result() {
       </section>
 
       <section className="card mt-4 p-4 sm:p-5">
-        <h2 className="mb-3 font-semibold">{foods.length === 3 ? 'בדיקת כל הזוגות בארוחה' : 'הסיבה לסיווג'}</h2>
+        <h2 className="mb-3 font-semibold">{foods.length > 2 ? `בדיקת כל הזוגות בארוחה (${result.pairs.length})` : 'הסיבה לסיווג'}</h2>
         <ul className="space-y-3">
-          {result.pairs.map((p) => (
+          {[...result.pairs].sort((a, b) => LEVEL_SEVERITY[b.level] - LEVEL_SEVERITY[a.level]).map((p) => (
             <li key={`${p.foodA.id}-${p.foodB.id}`} className="flex gap-3">
               <LevelDot level={p.level} />
               <div className="flex-1">

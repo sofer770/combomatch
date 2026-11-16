@@ -104,7 +104,7 @@ export interface CheckOptions {
   maxFoods?: number;
 }
 
-export function validateSelection(foods: Food[], { minFoods = 2, maxFoods = 3 }: CheckOptions = {}) {
+export function validateSelection(foods: Food[], { minFoods = 2, maxFoods = 6 }: CheckOptions = {}) {
   if (foods.length < minFoods) throw new CheckError(`יש לבחור לפחות ${minFoods} מזונות`, 'too_few');
   if (foods.length > maxFoods) throw new CheckError(`ניתן לבחור עד ${maxFoods} מזונות`, 'too_many');
   const ids = new Set(foods.map((f) => f.id));

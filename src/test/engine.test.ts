@@ -77,7 +77,9 @@ describe('rule engine', () => {
   it('rejects invalid selections', () => {
     expect(() => evaluateMeal([food('potato')], FIX)).toThrow(CheckError);
     expect(() => evaluateMeal([food('potato'), food('potato')], FIX)).toThrow(/פעמיים/);
-    expect(() => evaluateMeal([food('potato'), food('egg'), food('rice'), food('lettuce')], FIX)).toThrow(/עד 3/);
+    expect(() => evaluateMeal([food('potato'), food('egg'), food('rice'), food('lettuce')], FIX, { maxFoods: 3 })).toThrow(/עד 3/);
+    expect(() => evaluateMeal(['potato', 'egg', 'rice', 'lettuce', 'fish', 'banana', 'pear'].map(food), FIX)).toThrow(/עד 6/);
+    expect(evaluateMeal(['fish', 'broccoli', 'lettuce', 'spinach', 'cucumber', 'parsley'].map(food), METHOD_RULES).level).toBe('green');
     const unclassified: Food = { ...food('potato'), id: 'x', nameHe: 'מזון חדש', familyIds: [] };
     expect(() => evaluateMeal([food('potato'), unclassified], FIX)).toThrow(/לא שויך/);
   });
