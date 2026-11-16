@@ -43,7 +43,10 @@ export default function Home() {
         <h1 className="text-4xl font-bold tracking-tight text-leaf-dark sm:text-5xl">ComboMatch</h1>
         <p className="mt-1 text-xl font-semibold text-ink sm:text-2xl">שילובי וצירופי מזון</p>
         <p className="mt-2 text-lg text-muted">בודקים צירוף. אוכלים בראש שקט</p>
-        <InstallButton className="mt-4" />
+        <div className="mt-4 flex flex-wrap justify-center gap-2">
+          <Link to="/why" className="btn-soft">💡 למה חשוב לשמור על צירופי מזון?</Link>
+          <InstallButton />
+        </div>
       </section>
 
 

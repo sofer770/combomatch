@@ -11,6 +11,7 @@ import Foods from './pages/Foods';
 import Settings from './pages/Settings';
 import Admin from './pages/Admin';
 import Export from './pages/Export';
+import Why from './pages/Why';
 import { isAdmin } from './analytics';
 import { useDb } from './state/AppContext';
 import logo from './assets/logo.png';
@@ -87,6 +88,7 @@ export default function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/export" element={<Export />} />
+          <Route path="/why" element={<Why />} />
           <Route path="*" element={<div className="py-20 text-center"><p className="text-lg">הדף לא נמצא</p><Link to="/" className="btn-primary mt-4">למסך הבית</Link></div>} />
         </Routes>
       </main>
