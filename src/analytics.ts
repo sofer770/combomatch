@@ -3,7 +3,7 @@
 // The owner's device is never counted: it holds the admin key, which also unlocks the stats screen.
 
 /** The GoatCounter site code (the "xxx" in xxx.goatcounter.com). Empty = counting is off. */
-export const GOATCOUNTER_CODE = '';
+export const GOATCOUNTER_CODE = 'yair770';
 
 /** Only the published app is counted (not previews, local files or development). */
 const COUNTED_HOSTS = ['combo.el-habriut.co.il', 'sofer770.github.io'];
