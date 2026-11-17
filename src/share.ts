@@ -1,4 +1,5 @@
-export const APP_URL = 'https://combo.el-habriut.co.il/';
+// Shared link points to the preview page on the main site (Facebook's crawler is blocked on GitHub Pages); it redirects to the app.
+export const APP_URL = 'https://el-habriut.co.il/combo/';
 export const SHARE_TEXT = 'ComboMatch - שילובי וצירופי מזון. בודקים צירוף. אוכלים בראש שקט. בוחרים מזונות ומקבלים מיד אם הם משתלבים, לפי שיטת צירופי המזון. חינם, בלי הרשמה.';
 const PHONE_INTL = '972542135831';
 
