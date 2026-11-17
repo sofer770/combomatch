@@ -1,0 +1,21 @@
+name: Link preview check
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["Deploy to GitHub Pages"]
+    types: [completed]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch as link-preview crawlers
+        run: |
+          sleep 30
+          for url in https://combo.el-habriut.co.il/ https://combo.el-habriut.co.il/og-image.png http://combo.el-habriut.co.il/ https://sofer770.github.io/combomatch/; do
+            for ua in "facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)" "WhatsApp/2.23.20.0" "Twitterbot/1.0" "Mozilla/5.0"; do
+              echo "$(curl -s -o /dev/null -w '%{http_code} %{content_type} -> %{redirect_url}' -A "$ua" "$url")  $url  [$ua]"
+            done
+          done
+          curl -sI -A "facebookexternalhit/1.1" https://combo.el-habriut.co.il/
+          curl -s -A "facebookexternalhit/1.1" https://combo.el-habriut.co.il/ | head -c 600
+          echo; echo "--- cert"; echo | openssl s_client -connect combo.el-habriut.co.il:443 -servername combo.el-habriut.co.il 2>/dev/null | openssl x509 -noout -subject -dates
