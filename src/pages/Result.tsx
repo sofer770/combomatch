@@ -33,6 +33,9 @@ export default function Result() {
   const rules = useMemo(() => store.effectiveRules(db), [db]);
 
   const [details, setDetails] = useState(false);
+  const [allPairs, setAllPairs] = useState(false);
+  const actionsRef = useRef<HTMLDivElement>(null);
+  const [actionsVisible, setActionsVisible] = useState(true);
   const [saving, setSaving] = useState(false);
   const [swapIndex, setSwapIndex] = useState<number | null>(null);
   const [swapChooser, setSwapChooser] = useState(false);
@@ -76,6 +79,15 @@ export default function Result() {
     if (mealId && store.getState().savedMeals.some((m) => m.id === mealId)) store.updateMeal(mealId, { lastCheck: snapshot });
   }, [result, ids, foods, mealId, db.settings.rulesVersion, db.settings.demoMode, db.families]);
 
+  // Show a sticky action bar once the main actions under the verdict scroll out of view.
+  useEffect(() => {
+    const el = actionsRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const io = new IntersectionObserver(([e]) => setActionsVisible(e.isIntersecting || e.boundingClientRect.top > 0));
+    io.observe(el);
+    return () => io.disconnect();
+  }, [result]);
+
   const goWith = (newFoods: Food[]) => {
     setSelection(newFoods.map((f) => f.id));
     navigate(`/result?f=${newFoods.map((f) => f.id).join(',')}`);
@@ -96,6 +108,12 @@ export default function Result() {
   const suggestions = [...new Set(problemPairs.map((p) => p.decisive.rule?.suggestion).filter(Boolean))] as string[];
   const fam = (id: string) => familyName(db.families, id);
   const unverifiedFoods = foods.filter((f) => f.classificationStatus !== 'verified');
+  const sortedPairs = [...result.pairs].sort((a, b) => LEVEL_SEVERITY[b.level] - LEVEL_SEVERITY[a.level]);
+  // Collapsed view: with 2 foods show the single pair; otherwise only up to 3 non-green pairs.
+  const collapsedPairs = result.pairs.length === 1 ? sortedPairs : sortedPairs.filter((p) => p.level !== 'green').slice(0, 3);
+  const shownPairs = allPairs ? sortedPairs : collapsedPairs;
+  const hiddenPairs = sortedPairs.length - shownPairs.length;
+  const newCheck = () => { setSelection([]); navigate('/'); };
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -123,28 +141,26 @@ export default function Result() {
         )}
       </section>
 
-      <section className="card mt-4 p-4 sm:p-5">
-        <h2 className="mb-3 font-semibold">{foods.length > 2 ? `בדיקת כל הזוגות בארוחה (${result.pairs.length})` : 'הסיבה לסיווג'}</h2>
-        <ul className="space-y-3">
-          {[...result.pairs].sort((a, b) => LEVEL_SEVERITY[b.level] - LEVEL_SEVERITY[a.level]).map((p) => (
-            <li key={`${p.foodA.id}-${p.foodB.id}`} className="flex gap-3">
-              <LevelDot level={p.level} />
-              <div className="flex-1">
-                <p className="font-medium">
-                  {p.foodA.nameHe} + {p.foodB.nameHe}{' '}
-                  <span className="text-sm font-normal text-muted">({fam(p.decisive.familyA)} + {fam(p.decisive.familyB)})</span>
-                </p>
-                <p className="text-sm text-ink/80">
-                  {p.decisive.rule && p.decisive.level !== 'unknown'
-                    ? p.decisive.rule.explanation
-                    : 'טרם הוגדר כלל לצירוף בין משפחות אלו. ניתן להגדיר אותו במסך הכללים.'}
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <div ref={actionsRef} className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3" aria-label="פעולות על הצירוף">
+        <button className="btn-primary col-span-2 sm:col-span-1" onClick={() => setSaving(true)}>⭐ שמור כארוחה קבועה</button>
+        <button className="btn-soft" onClick={() => setSwapChooser(true)}>🔄 החלף רכיב</button>
+        <button className="btn-soft" onClick={newCheck}>➕ בדוק צירוף אחר</button>
+      </div>
+      <div className="mt-2 flex flex-wrap justify-center gap-x-5 gap-y-1 text-sm font-medium text-leaf-dark">
+        <Link className="hover:underline" to={`/export?f=${ids.join(',')}`}>📄 שמירה כ-PDF</Link>
+        <button type="button" className="hover:underline" onClick={() => { setSelection(ids); navigate('/'); }}>חזור למסך הבית</button>
+      </div>
 
+      {!actionsVisible && !saving && !swapChooser && (
+        <div className="print:hidden fixed inset-x-0 z-30 border-t border-line bg-surface/95 px-4 py-2 shadow-card backdrop-blur sm:!bottom-0"
+          style={{ bottom: 'calc(4.25rem + env(safe-area-inset-bottom))' }}>
+          <div className="mx-auto flex max-w-3xl items-center gap-2">
+            <span aria-hidden className={`grid h-9 w-9 shrink-0 place-items-center rounded-full font-bold text-white ${style.dot}`}>{style.symbol}</span>
+            <button className="btn-primary flex-1 px-3 py-2 text-sm" onClick={() => setSaving(true)}>⭐ שמור כארוחה</button>
+            <button className="btn-soft flex-1 px-3 py-2 text-sm" onClick={newCheck}>➕ צירוף אחר</button>
+          </div>
+        </div>
+      )}
       {(result.level === 'red' || result.level === 'yellow') && (
         <section className="card mt-4 p-4 sm:p-5">
           <h2 className="mb-2 font-semibold">איך לשפר את הארוחה</h2>
@@ -181,34 +197,43 @@ export default function Result() {
         </section>
       )}
 
-      {(() => {
-        const tips = tipsForFamilies(foods.flatMap((f) => f.familyIds));
-        return tips.length > 0 && (
-          <section className="card mt-4 border-s-4 border-leaf p-4 sm:p-5" aria-labelledby="tip-title">
-            <h2 id="tip-title" className="font-semibold">💡 טיפ משיטת הבריאות הטבעית</h2>
-            <ul className="mt-2 space-y-2">
-              {tips.map((t) => (
-                <li key={t.id} className="flex gap-2">
-                  <span aria-hidden>{t.icon}</span>
-                  <span><strong>{t.title}:</strong> {t.text}</span>
-                </li>
-              ))}
-            </ul>
-            <Link to="/tips" className="mt-2 inline-block text-sm font-medium text-leaf-dark hover:underline">לכל הטיפים ←</Link>
-          </section>
-        );
-      })()}
-
-      <div className="mt-5 grid grid-cols-2 gap-2 sm:grid-cols-3">
-        <button className="btn-soft" onClick={() => setSwapChooser(true)}>🔄 החלף רכיב</button>
-        <button className="btn-soft" onClick={() => setSaving(true)}>⭐ שמור כארוחה קבועה</button>
-        <Link className="btn-soft" to={`/export?f=${ids.join(',')}`}>📄 שמירה כ-PDF</Link>
-        <button className="btn-soft" aria-expanded={details} onClick={() => setDetails(!details)}>
-          📋 {details ? 'הסתר הסבר מפורט' : 'הצג הסבר מפורט'}
-        </button>
-        <button className="btn-ghost border border-line" onClick={() => { setSelection([]); navigate('/'); }}>בדוק צירוף אחר</button>
-        <button className="btn-ghost border border-line" onClick={() => { setSelection(ids); navigate('/'); }}>חזור למסך הבית</button>
-      </div>
+      <section className="card mt-4 p-4 sm:p-5">
+        <h2 className="mb-3 font-semibold">{foods.length > 2 ? `בדיקת כל הזוגות בארוחה (${result.pairs.length})` : 'הסיבה לסיווג'}</h2>
+        {shownPairs.length === 0 && (
+          <p className="text-sm text-ink/80">כל {result.pairs.length} הזוגות בארוחה מתאימים לשילוב.</p>
+        )}
+        <ul className="space-y-3">
+          {shownPairs.map((p) => (
+            <li key={`${p.foodA.id}-${p.foodB.id}`} className="flex gap-3">
+              <LevelDot level={p.level} />
+              <div className="flex-1">
+                <p className="font-medium">
+                  {p.foodA.nameHe} + {p.foodB.nameHe}{' '}
+                  <span className="text-sm font-normal text-muted">({fam(p.decisive.familyA)} + {fam(p.decisive.familyB)})</span>
+                </p>
+                <p className="text-sm text-ink/80">
+                  {p.decisive.rule && p.decisive.level !== 'unknown'
+                    ? p.decisive.rule.explanation
+                    : 'טרם הוגדר כלל לצירוף בין משפחות אלו. ניתן להגדיר אותו במסך הכללים.'}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm font-medium text-leaf-dark">
+          {hiddenPairs > 0 && (
+            <button type="button" className="hover:underline" aria-expanded={allPairs} onClick={() => setAllPairs(true)}>
+              ▾ הצג את כל הזוגות ({hiddenPairs} נוספים)
+            </button>
+          )}
+          {allPairs && sortedPairs.length > collapsedPairs.length && (
+            <button type="button" className="hover:underline" aria-expanded={allPairs} onClick={() => setAllPairs(false)}>▴ הצג פחות</button>
+          )}
+          <button type="button" className="hover:underline" aria-expanded={details} onClick={() => setDetails(!details)}>
+            📋 {details ? 'הסתר הסבר מפורט' : 'הצג הסבר מפורט'}
+          </button>
+        </div>
+      </section>
 
       {details && (
         <section className="card mt-4 animate-pop p-4 text-sm sm:p-5">
@@ -246,6 +271,23 @@ export default function Result() {
         </section>
       )}
 
+      {(() => {
+        const tips = tipsForFamilies(foods.flatMap((f) => f.familyIds));
+        return tips.length > 0 && (
+          <section className="card mt-4 border-s-4 border-leaf p-4 sm:p-5" aria-labelledby="tip-title">
+            <h2 id="tip-title" className="font-semibold">💡 טיפ משיטת הבריאות הטבעית</h2>
+            <ul className="mt-2 space-y-2">
+              {tips.map((t) => (
+                <li key={t.id} className="flex gap-2">
+                  <span aria-hidden>{t.icon}</span>
+                  <span><strong>{t.title}:</strong> {t.text}</span>
+                </li>
+              ))}
+            </ul>
+            <Link to="/tips" className="mt-2 inline-block text-sm font-medium text-leaf-dark hover:underline">לכל הטיפים ←</Link>
+          </section>
+        );
+      })()}
 
       <SaveMealDialog
         open={saving}

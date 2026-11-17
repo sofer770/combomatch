@@ -19,6 +19,11 @@ export default function Meals() {
     navigate('/');
     toast(`"${m.name}" נטענה למסך הבית`, 'info');
   };
+  const newMeal = () => {
+    setSelection([]);
+    navigate('/');
+    toast('בחרו מזונות, לחצו "בדוק צירוף" ואז "שמור כארוחה קבועה"', 'info');
+  };
   const recheck = (m: SavedMeal) => {
     const ids = store.mealFoodIds(m.id);
     setSelection(ids);
@@ -28,13 +33,13 @@ export default function Meals() {
   return (
     <div className="mx-auto max-w-3xl">
       <PageTitle title="ארוחות קבועות" subtitle="שילובים שאתם אוכלים לעיתים קרובות. לחיצה על ארוחה טוענת אותה למסך הבית." />
-      {db.savedMeals.length > 0 && (
-        <div className="-mt-2 mb-4"><Link to="/export?include=meals" className="btn-soft px-4 py-2 text-sm">📄 ייצוא ל-PDF</Link></div>
-      )}
+      <div className="-mt-2 mb-4 flex flex-wrap gap-2">
+        <button type="button" className="btn-primary px-4 py-2 text-sm" onClick={newMeal}>➕ ארוחה חדשה</button>
+        {db.savedMeals.length > 0 && <Link to="/export?include=meals" className="btn-soft px-4 py-2 text-sm">📄 ייצוא ל-PDF</Link>}
+      </div>
       {db.savedMeals.length === 0 ? (
         <EmptyState icon="⭐" title="עדיין אין ארוחות שמורות"
-          text='אחרי בדיקת צירוף, לחצו על "שמור כארוחה קבועה" כדי לשמור אותו כאן.'
-          action={<Link to="/" className="btn-primary">לבדיקת צירוף</Link>} />
+          text='לחצו על "ארוחה חדשה", בחרו מזונות ובדקו את הצירוף. במסך התוצאה לחצו על "שמור כארוחה קבועה" והיא תופיע כאן.' />
       ) : (
         <ul className="grid gap-3">
           {db.savedMeals.map((m) => {
